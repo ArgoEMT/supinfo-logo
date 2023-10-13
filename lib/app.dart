@@ -11,7 +11,6 @@ import 'config/flavor_config.dart';
 import 'config/services_setup.dart';
 import 'config/theme/app_theme.dart';
 import 'core/services/navigation_service.dart';
-import 'helpers/core_methods_platform_helper.dart';
 
 void run(FlavorConfig flavorConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,25 +72,20 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    if (!kIsWeb) {
-      SystemChrome.setSystemUIOverlayStyle(
-        isIOS ? SystemUiOverlayStyle.dark : SystemUiOverlayStyle.light,
-      );
-    }
 
     return MultiBlocProvider(
       providers: BlocSetup.globalBlocs,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: GetIt.I<NavigationService>().navigatorKey,
-        title: 'Flutter Bloc Template', //TODO: Change the name
+        title: 'VDA Logo Interpreter',
         theme: AppTheme.defaultTheme,
         onGenerateRoute: AppRouter.generateRoute,
         onGenerateInitialRoutes: (String initialRouteName) {
           return [
             AppRouter.generateRoute(
               const RouteSettings(
-                name: RoutePaths.home, //TODO: change initial route
+                name: RoutePaths.home,
               ),
             ),
           ];

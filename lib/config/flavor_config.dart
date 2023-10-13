@@ -25,7 +25,6 @@ enum Flavor {
 
 class EnvironmentConfig {
   static const envVariable = String.fromEnvironment('ENV_VARIABLE');
-  ///TODO: Get [AppConfig] from environment
 }
 
 class FlavorConfig {

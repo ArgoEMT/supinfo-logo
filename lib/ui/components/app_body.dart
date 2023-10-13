@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:okteo_flutter_icons/okteo_icons.dart';
 
 import '../../config/app_router.dart';
 import '../../config/flavor_config.dart';
 import '../../config/theme/app_colors.dart';
 import '../../config/theme/app_text_styles.dart';
-import 'app_bottom_navigation_bar.dart';
 import 'template_appbar.dart';
 
 class AppBody extends StatelessWidget {
@@ -65,9 +63,6 @@ class AppBody extends StatelessWidget {
           message: flavorConfig.flavor.toString(),
           child: Scaffold(
             backgroundColor: backgroundColor ?? appWhite,
-            bottomNavigationBar: showBottomBar
-                ? (bottomBar ?? const AppBottomNavigationBar())
-                : null,
             appBar: appBar ??
                 (showAppBar
                     ? TemplateAppbar(
@@ -76,7 +71,7 @@ class AppBody extends StatelessWidget {
                         child: Row(
                           children: [
                             if (titleIcon != null)
-                              OkteoIcon(
+                              Icon(
                                 titleIcon!,
                                 color: appBlack,
                               ),

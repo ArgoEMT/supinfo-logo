@@ -25,6 +25,5 @@ class ServicesSetup {
       ),
     ));
 
-    //TODO: add services that need to be accessible globally
   }
 }

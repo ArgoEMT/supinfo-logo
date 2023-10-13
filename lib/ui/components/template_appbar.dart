@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../config/app_router.dart';
 import '../../config/theme/app_colors.dart';
-import '../../helpers/core_methods_platform_helper.dart';
 
 enum ReturnType {
   close,
@@ -35,13 +33,6 @@ class TemplateAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final color = backgroundColor ?? appWhite;
-    final systemUiOverlayStyle = color.isLight
-        ? isIOS
-            ? SystemUiOverlayStyle.dark
-            : SystemUiOverlayStyle.light
-        : isIOS
-            ? SystemUiOverlayStyle.light
-            : SystemUiOverlayStyle.dark;
 
     return SizedBox(
       height: 100,
@@ -49,7 +40,6 @@ class TemplateAppbar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: color,
         elevation: 0,
         automaticallyImplyLeading: returnType != null,
-        systemOverlayStyle: systemUiOverlayStyle,
         leadingWidth: 48,
         leading: returnType != null
             ? InkWell(

@@ -1,8 +1,6 @@
 import '../../ui/ui_helpers/ui_snackbar_helper.dart';
 
 class HomeService {
-  //TODO: Add api calls here
-
   Future<List<String>> getHomeData() async {
     await Future.delayed(const Duration(seconds: 2));
     return ['Hello', 'World', '!'];
