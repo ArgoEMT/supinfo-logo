@@ -66,7 +66,7 @@ class AppBody extends StatelessWidget {
                 (showAppBar
                     ? TemplateAppbar(
                         backgroundColor:
-                            appBarBackgroundColor ?? homeBackgroundColor,
+                            appBarBackgroundColor ?? appbackgroundColor,
                         child: Row(
                           children: [
                             if (titleIcon != null)

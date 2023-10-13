@@ -28,7 +28,7 @@ const Color appRed = Color(0xFFFF9580);
 const Color appDivider = Color(0xFF7970A9);
 
 /// 0xFF22212C => Background Homescreen
-const Color homeBackgroundColor = Color(0xFF22212C);
+const Color appbackgroundColor = Color(0xFF22212C);
 
 extension ColorExtension on Color {
   //? Ce code à été proposé par @mr_mmmmore sur StackOverflow
@@ -59,7 +59,6 @@ extension ColorExtension on Color {
       blue + ((255 - blue) * percent).round(),
     );
   }
-
 
   bool get isLight =>
       ThemeData.estimateBrightnessForColor(this) == Brightness.light;
