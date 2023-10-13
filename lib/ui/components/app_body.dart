@@ -62,23 +62,22 @@ class AppBody extends StatelessWidget {
           color: flavorConfig.color,
           message: flavorConfig.flavor.toString(),
           child: Scaffold(
-            backgroundColor: backgroundColor ?? appWhite,
             appBar: appBar ??
                 (showAppBar
                     ? TemplateAppbar(
-                        backgroundColor: appBarBackgroundColor ??
-                            homeBackgroundColor.lighten(0.5),
+                        backgroundColor:
+                            appBarBackgroundColor ?? homeBackgroundColor,
                         child: Row(
                           children: [
                             if (titleIcon != null)
                               Icon(
                                 titleIcon!,
-                                color: appBlack,
+                                color: appPurple,
                               ),
                             const SizedBox(width: 10),
                             Text(
                               title!,
-                              style: bold20Black,
+                              style: bold20White,
                             ),
                           ],
                         ),

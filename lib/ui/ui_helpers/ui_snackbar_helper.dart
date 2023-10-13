@@ -5,8 +5,6 @@ import '../../config/theme/app_colors.dart';
 import '../../config/theme/app_text_styles.dart';
 import '../../core/services/navigation_service.dart';
 
-
-
 /// Créé une snackbar custom.
 Future showSnackbar({
   required String? titre,
@@ -25,7 +23,7 @@ Future showSnackbar({
       .showSnackBar(
         SnackBar(
           width: MediaQuery.of(context).size.width * 0.9,
-          backgroundColor: isError ? appRed : appBlack,
+          backgroundColor: isError ? appRed : appPurple,
           behavior: SnackBarBehavior.floating,
           duration: Duration(seconds: duration),
           padding: const EdgeInsets.only(
@@ -49,7 +47,7 @@ Future showSnackbar({
                             (isError
                                 ? 'Une erreur est survenue'
                                 : 'Opération réussie'),
-                        style: bold14Black.copyWith(color: appWhite),
+                        style: bold14White.copyWith(color: appWhite),
                         overflow: TextOverflow.clip,
                       ),
                     ),

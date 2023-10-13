@@ -9,13 +9,13 @@ class AppTheme {
 
   static AppBarTheme _appBarTheme(ThemeData base) {
     return base.appBarTheme.copyWith(
-      iconTheme: const IconThemeData(color: appWhite),
-      color: appWhite,
+      iconTheme: const IconThemeData(color: homeBackgroundColor),
+      color: homeBackgroundColor,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       toolbarTextStyle: base.textTheme
           .copyWith(
             titleLarge: base.textTheme.titleLarge?.copyWith(
-              color: appWhite,
+              color: homeBackgroundColor,
               fontSize: 28.0,
               fontWeight: FontWeight.w500,
             ),
@@ -24,7 +24,7 @@ class AppTheme {
       titleTextStyle: base.textTheme
           .copyWith(
             titleLarge: base.textTheme.titleLarge?.copyWith(
-              color: appWhite,
+              color: homeBackgroundColor,
               fontSize: 28.0,
               fontWeight: FontWeight.w500,
             ),
@@ -43,31 +43,31 @@ class AppTheme {
         TargetPlatform.linux: FadeTransitionBuilder(),
         TargetPlatform.fuchsia: FadeTransitionBuilder(),
       }),
-      primaryColor: appWhite,
-      primaryColorDark: appBlack50,
-      primaryColorLight: appWhite,
+      primaryColor: homeBackgroundColor,
+      primaryColorDark: appPurple,
+      primaryColorLight: homeBackgroundColor,
       buttonTheme: base.buttonTheme.copyWith(
-        disabledColor: appBlack50,
+        disabledColor: appDivider,
         buttonColor: appGreen,
         textTheme: ButtonTextTheme.primary,
       ),
       appBarTheme: _appBarTheme(base),
       floatingActionButtonTheme: base.floatingActionButtonTheme.copyWith(
-        foregroundColor: appWhite, //TextColorTitle
+        foregroundColor: homeBackgroundColor, //TextColorTitle
         backgroundColor: appGreen,
       ),
       inputDecorationTheme: InputDecorationTheme(
-        labelStyle: const TextStyle(color: appBlack),
-        fillColor: appWhite,
+        labelStyle: const TextStyle(color: appWhite),
+        fillColor: homeBackgroundColor,
         filled: true,
         focusColor: Colors.transparent,
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: appBlack.withOpacity(0.8),
+            color: appWhite.withOpacity(0.8),
           ),
         ),
         disabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: appBlack50),
+          borderSide: BorderSide(color: appDivider),
         ),
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: appGreen),
@@ -76,28 +76,28 @@ class AppTheme {
           borderSide: BorderSide(color: appRed),
         ),
       ),
-      scaffoldBackgroundColor: appWhite,
-      cardColor: appWhite,
+      scaffoldBackgroundColor: homeBackgroundColor,
+      cardColor: homeBackgroundColor,
       tabBarTheme: _tabBarTheme(base),
       textTheme: base.textTheme.copyWith(
         displayLarge: base.textTheme.displayLarge?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         displayMedium: base.textTheme.displayMedium?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         displaySmall: base.textTheme.displaySmall?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         headlineMedium: base.textTheme.headlineMedium?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         headlineSmall: base.textTheme.headlineSmall?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         titleLarge: base.textTheme.titleLarge?.copyWith(
@@ -105,29 +105,29 @@ class AppTheme {
           fontFamily: 'Inter',
         ),
         bodyMedium: base.textTheme.bodyMedium?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         bodyLarge: base.textTheme.bodyLarge?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
         ),
         bodySmall: base.textTheme.bodySmall?.copyWith(
-          color: appBlack,
+          color: appWhite,
           fontFamily: 'Inter',
           fontSize: 16,
         ),
       ),
       bottomNavigationBarTheme: base.bottomNavigationBarTheme.copyWith(
-        unselectedItemColor: appBlack50,
+        unselectedItemColor: appDivider,
         selectedItemColor: appGreen,
       ),
       textSelectionTheme: base.textSelectionTheme.copyWith(
-        cursorColor: appBlack,
+        cursorColor: appWhite,
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: appWhite,
+          foregroundColor: homeBackgroundColor,
           backgroundColor: appGreen,
         ),
       ),
@@ -139,62 +139,86 @@ class AppTheme {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: appGreen,
-          textStyle: const TextStyle(color: appWhite),
+          textStyle: const TextStyle(color: homeBackgroundColor),
         ),
       ),
       snackBarTheme: SnackBarThemeData(
         actionTextColor: appGreen,
-        contentTextStyle: normal14Black.copyWith(color: appWhite),
+        contentTextStyle: normal14White.copyWith(color: homeBackgroundColor),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5.0),
         ),
-        backgroundColor: appBlack,
+        backgroundColor: appWhite,
         behavior: SnackBarBehavior.floating,
-        disabledActionTextColor: appBlack50,
+        disabledActionTextColor: appDivider,
       ),
       tooltipTheme: TooltipThemeData(
-        textStyle: normal14Black.copyWith(color: appWhite),
+        textStyle: normal14White.copyWith(color: homeBackgroundColor),
         decoration: BoxDecoration(
-          color: appBlack,
+          color: appWhite,
           borderRadius: BorderRadius.circular(5),
         ),
       ),
-      dividerColor: appGrey, switchTheme: SwitchThemeData(
- thumbColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return appGreen; }
- return null;
- }),
- trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return appGreen; }
- return null;
- }),
- ), radioTheme: RadioThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return appGreen; }
- return null;
- }),
- ), checkboxTheme: CheckboxThemeData(
- fillColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
- if (states.contains(MaterialState.disabled)) { return null; }
- if (states.contains(MaterialState.selected)) { return appGreen; }
- return null;
- }),
- ), colorScheme: const ColorScheme(
+      dividerColor: appDivider,
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return appGreen;
+          }
+          return null;
+        }),
+        trackColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return appGreen;
+          }
+          return null;
+        }),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return appGreen;
+          }
+          return null;
+        }),
+      ),
+      checkboxTheme: CheckboxThemeData(
+        fillColor: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return null;
+          }
+          if (states.contains(MaterialState.selected)) {
+            return appGreen;
+          }
+          return null;
+        }),
+      ),
+      colorScheme: const ColorScheme(
         primary: appGreen,
         secondary: appGreen,
-        surface: appWhite,
-        background: appWhite,
+        surface: homeBackgroundColor,
+        background: homeBackgroundColor,
         error: appRed,
-        onPrimary: appWhite,
+        onPrimary: homeBackgroundColor,
         onSecondary: appGreen,
         onSurface: appGreen,
         onBackground: appGreen,
-        onError: appWhite,
+        onError: homeBackgroundColor,
         brightness: Brightness.dark,
-      ).copyWith(background: appWhite),
+      ).copyWith(background: homeBackgroundColor),
     );
 
     t.copyWith(

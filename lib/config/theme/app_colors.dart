@@ -1,37 +1,34 @@
 import 'package:flutter/material.dart';
 
-/// 0xFF1A936F => Vert Agrilib - Primaire
-const Color appGreen = Color(0xFF1A936F);
+/// 0xFF8AFF80 => Vert
+const Color appGreen = Color(0xFF8AFF80);
 
-/// 0xFF262626 => Noir - Texte
-const Color appBlack = Color(0xFF262626);
+/// 0xFF8AFF80 => Vert
+const Color appPurple = Color(0xFF9580FF);
 
-/// 0x80262626 => Noir avec 50% d'opacité
-const Color appBlack50 = Color(0x80262626);
+/// 0xFF80FFEA => Cyan
+const Color appCyan = Color(0xFF80FFEA);
 
-/// 0xB3262626 => Noir avec 70% d'opacité
-const Color appBlack70 = Color(0xB3262626);
+/// 0xFFFF80BF => Rose
+const Color appPink = Color(0xFFFF80BF);
 
-/// 0xFFFFFFFF => Blanc - Fond
-const Color appWhite = Color(0xFFFFFFFF);
+/// 0xFFFFFF80 => Jaune
+const Color appYellow = Color(0xFFFFFF80);
 
-/// 0xFFF8F8F8 => Blanc - Fond SearchBar
-const Color appWhiteF8 = Color(0xFFF8F8F8);
+/// 0xFFF8F8F2 => Blanc - Text
+const Color appWhite = Color(0xFFF8F8F2);
 
-/// 0xFFD4770A => Orange - En attente/Warning
-const Color appOrange = Color(0xFFD4770A);
+/// 0xFFFFCA80 => Orange - En attente/Warning
+const Color appOrange = Color(0xFFFFCA80);
 
-/// 0xFF9E0F0F => Rouge - Erreur/Danger
-const Color appRed = Color(0xFF9E0F0F);
+/// 0xFFFF9580 => Rouge - Erreur/Danger
+const Color appRed = Color(0xFFFF9580);
 
-/// 0xFFE5EBF0 => Gris clair - Bordure bouton secondaire
-const Color appLightGrey = Color(0xFFE5EBF0);
+/// 0xFF7970A9 => Comment - Bordure champs/Divider
+const Color appDivider = Color(0xFF7970A9);
 
-/// 0xFFC4CCD2 => Gris - Bordure champs/Divider
-const Color appGrey = Color(0xFFC4CCD2);
-
-/// 0xFFF0F8EF => Vert clair - Background Homescreen
-const Color homeBackgroundColor = Color(0xFFF0F8EF);
+/// 0xFF22212C => Background Homescreen
+const Color homeBackgroundColor = Color(0xFF22212C);
 
 extension ColorExtension on Color {
   //? Ce code à été proposé par @mr_mmmmore sur StackOverflow

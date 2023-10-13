@@ -48,7 +48,7 @@ class TemplateAppbar extends StatelessWidget implements PreferredSizeWidget {
                   returnType == ReturnType.close
                       ? Icons.close
                       : Icons.arrow_back_ios_new,
-                  color: textColor ?? appBlack,
+                  color: textColor ?? appPurple,
                   size: 18,
                 ),
               )

@@ -2,43 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-
-/// Color: [alBlack] - FontSize: 12 - FontWeight: 400
-const TextStyle normal12Black = TextStyle(
+/// Color: [appWhite] - FontSize: 12 - FontWeight: 400
+const TextStyle normal12White = TextStyle(
   fontSize: 12,
-  color: appBlack,
+  color: appWhite,
   fontWeight: FontWeight.w400,
   fontFamily: 'Inter',
 );
 
-/// Color: [appBlack50] - FontSize: 12 - FontWeight: 400
-TextStyle normal12Black50 = const TextStyle(
+/// Color: [appWhite] - FontSize: 12 - FontWeight: 600
+TextStyle bold12White = const TextStyle(
   fontSize: 12,
-  color: appBlack50,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w400,
-);
-
-/// Color: [appBlack] - FontSize: 12 - FontWeight: 600
-TextStyle bold12Black = const TextStyle(
-  fontSize: 12,
-  color: appBlack,
+  color: appWhite,
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
 );
 
-/// Color: [appBlack50] - FontSize: 12 - FontWeight: 600
-TextStyle bold12Black50 = const TextStyle(
+/// Color: [appPurple] - FontSize: 12 - FontWeight: 600
+const TextStyle bold12Purple = TextStyle(
   fontSize: 12,
-  color: appBlack50,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w600,
-);
-
-/// Color: [appGreen] - FontSize: 12 - FontWeight: 600
-const TextStyle bold12Green = TextStyle(
-  fontSize: 12,
-  color: appGreen,
+  color: appPurple,
   fontWeight: FontWeight.w600,
   fontFamily: 'Inter',
 );
@@ -61,45 +44,23 @@ const TextStyle bold12Red = TextStyle(
 
 // -------------------------------------------- \\\
 
-/// Color: [appBlack] - FontSize: 14 - FontWeight: 400
-const normal14Black = TextStyle(
+/// Color: [appWhite] - FontSize: 14 - FontWeight: 400
+const normal14White = TextStyle(
   fontWeight: FontWeight.w400,
   fontSize: 14,
-  color: appBlack,
+  color: appWhite,
 );
 
-/// Color: [appBlack70] - FontSize: 14 - FontWeight: 400
-const normal14Black70 = TextStyle(
-  fontWeight: FontWeight.w400,
+/// Color: [appWhite] - FontSize: 14 - FontWeight: 600
+const TextStyle bold14White = TextStyle(
   fontSize: 14,
-  color: appBlack70,
-);
-
-/// Color: [appBlack50] - FontSize: 14 - FontWeight: 400
-const normal14Black50 = TextStyle(
-  fontWeight: FontWeight.w400,
-  fontSize: 14,
-  color: appBlack50,
-);
-
-/// Color: [appBlack] - FontSize: 14 - FontWeight: 600
-const TextStyle bold14Black = TextStyle(
-  fontSize: 14,
-  color: appBlack,
+  color: appWhite,
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
 );
 
-/// Color: [appBlack50] - FontSize: 14 - FontWeight: 600
-const TextStyle bold14Black50 = TextStyle(
-  fontSize: 14,
-  color: appBlack50,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w600,
-);
-
-/// Color: [appGreen] - FontSize: 14 - FontWeight: 600
-const TextStyle bold14Green = TextStyle(
+/// Color: [appPurple] - FontSize: 14 - FontWeight: 600
+const TextStyle bold14Purple = TextStyle(
   fontSize: 14,
   color: appGreen,
   fontFamily: 'Inter',
@@ -108,76 +69,44 @@ const TextStyle bold14Green = TextStyle(
 
 // -------------------------------------------- \\\
 
-/// Color: [appGreen] - FontSize: 16 - FontWeight: 400
-const normal16Green = TextStyle(
+/// Color: [appPurple] - FontSize: 16 - FontWeight: 400
+const normal16Purple = TextStyle(
   fontSize: 16,
   fontWeight: FontWeight.w400,
   fontFamily: 'Inter',
-  color: appGreen,
+  color: appPurple,
 );
 
-/// Color: [appBlack] - FontSize: 16 - FontWeight: 400
-const normal16Black = TextStyle(
+/// Color: [appWhite] - FontSize: 16 - FontWeight: 400
+const normal16White = TextStyle(
   fontSize: 16,
-  color: appBlack,
+  color: appWhite,
   fontWeight: FontWeight.w400,
   fontFamily: 'Inter',
-);
-
-/// Color: [appBlack50] - FontSize: 16 - FontWeight: 400
-const normal16Black50 = TextStyle(
-  fontSize: 16,
-  color: appBlack50,
-  fontWeight: FontWeight.w400,
-  fontFamily: 'Inter',
-);
-
-/// Color: [appBlack50] - FontSize: 16 - FontWeight: 600
-const bold16Black50 = TextStyle(
-  fontSize: 16,
-  color: appBlack50,
-  fontWeight: FontWeight.w600,
-  fontFamily: 'Inter',
-);
-
-/// Color: [appBlack70] - FontSize: 16 - FontWeight: 600
-const bold16Black70 = TextStyle(
-  fontSize: 16,
-  color: appBlack70,
-  fontWeight: FontWeight.w600,
-  fontFamily: 'Inter',
-);
-
-/// Color: [applack] - FontSize: 16 - FontWeight: 600
-const bold16Black = TextStyle(
-  fontSize: 16,
-  color: appBlack,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w600,
-);
-
-/// Color: [appGreen] - FontSize: 16 - FontWeight: 600
-const TextStyle bold16Green = TextStyle(
-  fontSize: 16,
-  color: appGreen,
-  fontFamily: 'Inter',
-  fontWeight: FontWeight.w600,
 );
 
 /// Color: [appWhite] - FontSize: 16 - FontWeight: 600
-const TextStyle bold16White = TextStyle(
+const bold16White = TextStyle(
   fontSize: 16,
   color: appWhite,
-  fontWeight: FontWeight.w600,
   fontFamily: 'Inter',
+  fontWeight: FontWeight.w600,
+);
+
+/// Color: [appPurple] - FontSize: 16 - FontWeight: 600
+const TextStyle bold16Purple = TextStyle(
+  fontSize: 16,
+  color: appPurple,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w600,
 );
 
 // -------------------------------------------- \\\
 
-/// Color: [appBlack] - FontSize: 20 - FontWeight: 600
-const bold20Black = TextStyle(
+/// Color: [appWhite] - FontSize: 20 - FontWeight: 600
+const bold20White = TextStyle(
   fontSize: 20,
-  color: appBlack,
+  color: appWhite,
   fontFamily: 'Inter',
   fontWeight: FontWeight.w600,
 );
