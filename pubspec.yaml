@@ -1,0 +1,28 @@
+name: flutter_bloc_template
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.1.1 <4.0.0"
+
+dependencies:
+  get_it: ^7.2.0
+  logger: ^2.0.0
+  hive: ^2.2.3
+  shared_preferences: ^2.0.15
+  path_provider: ^2.0.11
+  flutter_bloc: ^8.1.2
+  okteo_flutter_icons:
+    path: ./packages/okteo_flutter_icons
+
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
