@@ -42,15 +42,13 @@ class HomeScreen extends StatelessWidget {
                                 width: PainterConstants.painterHeight,
                                 height: PainterConstants.painterWidth,
                                 child: LogoPainter(
-                                  backgroundColor: cubit.logo.backgroundColor,
-                                  painter: cubit.painter,
+                                  backgroundColor: cubit.backgroundColor,
+                                  model: cubit.logoModel,
                                 ),
                               ),
                               const SizedBox(width: 24),
                               Expanded(
-                                child: HistoryList(
-                                  history: state.history,
-                                ),
+                                child: HistoryList(history: state.history),
                               ),
                             ],
                           ),

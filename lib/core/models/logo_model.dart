@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/config/theme/app_colors.dart';
-import 'package:flutter_bloc_template/core/constants/painter_constants.dart';
-import 'package:flutter_bloc_template/core/models/instruction/base_instruction_model.dart';
+import 'package:flutter_bloc_template/core/helpers/instruction_interpretor_helper.dart';
+
+import '../../config/theme/app_colors.dart';
+import '../constants/painter_constants.dart';
+import '../helpers/instruction_painter.dart';
+import 'instruction/base_instruction_model.dart';
 
 class LogoModel {
   LogoModel({
@@ -12,12 +15,14 @@ class LogoModel {
     this.angle = 0,
     this.trailColor = appPurple,
     this.backgroundColor = appbackgroundColor,
-  });
+  }) {
+    painter = InstructionPainter(trailColor: trailColor);
+  }
 
   final List<BaseInstructionModel> history = [];
 
   /// The angle of the turtle
-  int angle;
+  double angle;
 
   /// The background color of the canvas
   Color backgroundColor;
@@ -28,6 +33,23 @@ class LogoModel {
   /// The color of the trail
   Color trailColor;
 
+  late final InstructionPainter painter;
+
   List<String> get historyString =>
       history.map((e) => e.instructionToString()).toList();
+
+  void addInstruction(String instruction) {
+    final instructionObject =
+        InstructionInterpretorHelper.translateToLogoInstruction(
+      instruction,
+    );
+    history.add(instructionObject);
+    final newOffset = InstructionInterpretorHelper.calculatePosition(
+      instructionModel: instructionObject,
+      model: this,
+    );
+    painter.addOffsets(newOffset);
+  }
+
+  Offset get lastOffset => painter.lastOffset;
 }

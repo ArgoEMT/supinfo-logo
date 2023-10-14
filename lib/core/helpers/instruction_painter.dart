@@ -17,6 +17,8 @@ class InstructionPainter extends CustomPainter {
   }
   final List<InstructionPainterHistoryItem> _points = [];
 
+  Offset get lastOffset => _points.last.offset;
+
   Color _currentColor;
 
   @override

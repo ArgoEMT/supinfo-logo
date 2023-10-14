@@ -10,33 +10,19 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitialState());
 
-  final LogoModel logo = LogoModel();
-  late final InstructionPainter painter;
+  final LogoModel logoModel = LogoModel();
   final focusNode = FocusNode();
+
+  Color get backgroundColor => logoModel.backgroundColor;
 
   Future init() async {
     //TODO: get saved scripts, load classroom...
-    painter = InstructionPainter(trailColor: logo.trailColor);
-    emit(HomeDrawState(history: logo.historyString));
+    emit(HomeDrawState(history: logoModel.historyString));
   }
 
   void addInstruction(String instruction) {
-    final instructionObject =
-        InstructionInterpretorHelper.translateToLogoInstruction(
-      instruction,
-    );
-    logo.history.add(instructionObject);
-    final newOffset = InstructionInterpretorHelper.calculatePosition(
-      instructionModel: instructionObject,
-      model: logo,
-    );
-    addOffsets(newOffset);
-    emit(HomeDrawState(history: logo.historyString));
+    logoModel.addInstruction(instruction);
+    emit(HomeDrawState(history: logoModel.historyString));
     focusNode.requestFocus();
-  }
-
-  void addOffsets(List<Offset> offsets) {
-    painter.addOffsets(offsets);
-    emit(HomeDrawState(history: logo.historyString));
   }
 }

@@ -103,6 +103,7 @@ class InstructionInterpretorHelper {
       final x = position.dx + distance * sin(angle * pi / 180);
       final y = position.dy - distance * cos(angle * pi / 180);
       print('x: $x, y: $y');
+      model.position = Offset(x, y);
       return [Offset(x, y)];
     }
     return [];
