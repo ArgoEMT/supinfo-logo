@@ -6,7 +6,8 @@ import 'package:flutter_bloc_template/core/models/instruction/repete_instruction
 class InstructionInterpretorHelper {
   /// Take a string of instructions and return a list of [LogoInstructionModel]
   static List<LogoInstructionModel> _createInstructionList(
-      String instructionString) {
+    String instructionString,
+  ) {
     final instructionList = instructionString.split(' ');
     if (instructionList.isEmpty) {
       throw Exception('Instruction bloc is empty');
@@ -17,12 +18,17 @@ class InstructionInterpretorHelper {
       while (instructionList.isNotEmpty) {
         final instruction = InstructionEnum.fromString(instructionList.first);
         final parameterCount = instruction.parameterCount;
-        final parameters =
-            instructionList.sublist(1, parameterCount + 1).map((e) => int.parse(e)).toList();
+        final parameters = instructionList
+            .sublist(1, parameterCount + 1)
+            .map((e) => int.parse(e))
+            .toList();
         if (parameters.length < parameterCount) {
-          throw Exception('Not enough parameters for instruction ${instruction.toString()}');
+          throw Exception(
+              'Not enough parameters for instruction ${instruction.toString()}');
         } else if (parameters.length > parameterCount) {
-          throw Exception('Too many parameters for instruction $instructionString');
+          throw Exception(
+            'Too many parameters for instruction $instructionString',
+          );
         }
         returnList.add(LogoInstructionModel(
           instruction: instruction,
@@ -38,7 +44,7 @@ class InstructionInterpretorHelper {
   // Take a string of instructions and return a list of [BaseInstructionModel]
   static BaseInstructionModel translateToLogoInstruction(
       String instructionString) {
-    final instructionList = instructionString.split(' ');
+    final instructionList = (instructionString.toLowerCase()).split(' ');
     if (instructionList.isEmpty) {
       throw Exception('Instruction string is empty');
     }
@@ -58,9 +64,13 @@ class InstructionInterpretorHelper {
           instructionList.sublist(1).map((e) => int.parse(e)).toList();
 
       if (parameters.length < instruction.parameterCount) {
-        throw Exception('Not enough parameters for instruction $instructionString');
+        throw Exception(
+          'Not enough parameters for instruction $instructionString',
+        );
       } else if (parameters.length > instruction.parameterCount) {
-        throw Exception('Too many parameters for instruction $instructionString');
+        throw Exception(
+          'Too many parameters for instruction $instructionString',
+        );
       }
 
       return LogoInstructionModel(
@@ -70,5 +80,5 @@ class InstructionInterpretorHelper {
     } catch (e) {
       throw Exception('Instruction is not valid');
     }
-  } 
+  }
 }

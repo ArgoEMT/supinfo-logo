@@ -21,6 +21,9 @@ class LogoModel {
 
   /// The color of the trail
   int trailColor;
+
+  List<String> get historyString =>
+      history.map((e) => e.instructionToString()).toList();
 }
 
 class LogoPosition {
