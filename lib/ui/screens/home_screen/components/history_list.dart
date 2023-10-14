@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/config/theme/app_colors.dart';
+
+import '../../../../config/theme/app_colors.dart';
+import '../../../../core/constants/painter_constants.dart';
 
 class HistoryList extends StatelessWidget {
   const HistoryList({super.key, required this.history});
@@ -10,7 +12,7 @@ class HistoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(border: Border.all(color: appDivider)),
-      height: 750,
+      height: PainterConstants.painterHeight,
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),

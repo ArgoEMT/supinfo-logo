@@ -1,11 +1,17 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc_template/config/theme/app_colors.dart';
+import 'package:flutter_bloc_template/core/constants/painter_constants.dart';
 import 'package:flutter_bloc_template/core/models/instruction/base_instruction_model.dart';
 
 class LogoModel {
   LogoModel({
-    this.position = const LogoPosition(x: 0, y: 0),
+    this.position = const Offset(
+      PainterConstants.painterHeight / 2,
+      PainterConstants.painterWidth / 2,
+    ),
     this.angle = 0,
-    this.trailColor = 0,
-    this.backgroundColor = 0,
+    this.trailColor = appPurple,
+    this.backgroundColor = appbackgroundColor,
   });
 
   final List<BaseInstructionModel> history = [];
@@ -14,21 +20,14 @@ class LogoModel {
   int angle;
 
   /// The background color of the canvas
-  int backgroundColor;
+  Color backgroundColor;
 
   /// The position of the turtle
-  LogoPosition position;
+  Offset position;
 
   /// The color of the trail
-  int trailColor;
+  Color trailColor;
 
   List<String> get historyString =>
       history.map((e) => e.instructionToString()).toList();
-}
-
-class LogoPosition {
-  const LogoPosition({required this.x, required this.y});
-
-  final int x;
-  final int y;
 }

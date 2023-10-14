@@ -142,4 +142,13 @@ enum InstructionEnum {
         throw Exception('String entered is not a valid instruction');
     }
   }
+
+  bool get isInstructionToMove => moveInstructions.contains(this);
 }
+
+const moveInstructions = [
+  InstructionEnum.av,
+  InstructionEnum.re,
+  InstructionEnum.origine,
+  InstructionEnum.fpos,
+];

@@ -2,11 +2,12 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_template/ui/screens/home_screen/components/logo_painter.dart';
 
+import '../../../core/constants/painter_constants.dart';
 import '../../components/app_body.dart';
 import 'components/console_widget.dart';
 import 'components/history_list.dart';
+import 'components/logo_painter.dart';
 import 'home_cubit/home_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -37,11 +38,11 @@ class HomeScreen extends StatelessWidget {
                         children: [
                           Row(
                             children: [
-                              Container(
-                                color: Colors.grey,
-                                width: 750,
-                                height: 750,
+                              SizedBox(
+                                width: PainterConstants.painterHeight,
+                                height: PainterConstants.painterWidth,
                                 child: LogoPainter(
+                                  backgroundColor: cubit.logo.backgroundColor,
                                   painter: cubit.painter,
                                 ),
                               ),
@@ -52,18 +53,6 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ],
-                          ),
-                          OutlinedButton(
-                            onPressed: () {
-                              final painter = cubit.painter;
-
-                              final offset = Offset(
-                                500 * Random().nextDouble(),
-                                500 * Random().nextDouble(),
-                              );
-                              cubit.addOffset(offset);
-                            },
-                            child: Text('click me'),
                           ),
                           const SizedBox(height: 24),
                           ConsoleWidget(

@@ -11,12 +11,12 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitialState());
 
   final LogoModel logo = LogoModel();
-  final painter = InstructionPainter(_points);
-  static List<Offset> _points = <Offset>[];
+  late final InstructionPainter painter;
   final focusNode = FocusNode();
 
   Future init() async {
     //TODO: get saved scripts, load classroom...
+    painter = InstructionPainter(trailColor: logo.trailColor);
     emit(HomeDrawState(history: logo.historyString));
   }
 
@@ -26,12 +26,17 @@ class HomeCubit extends Cubit<HomeState> {
       instruction,
     );
     logo.history.add(instructionObject);
+    final newOffset = InstructionInterpretorHelper.calculatePosition(
+      instructionModel: instructionObject,
+      model: logo,
+    );
+    addOffsets(newOffset);
     emit(HomeDrawState(history: logo.historyString));
     focusNode.requestFocus();
   }
 
-  void addOffset(Offset offset) {
-    _points.add(offset);
+  void addOffsets(List<Offset> offsets) {
+    painter.addOffsets(offsets);
     emit(HomeDrawState(history: logo.historyString));
   }
 }
