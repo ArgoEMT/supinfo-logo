@@ -83,23 +83,12 @@ class AppBody extends StatelessWidget {
                         ),
                       )
                     : null),
-            body: hasSingleChildScrollView
-                ? SingleChildScrollView(
-                    physics: scrollPhysics,
-                    controller: scrollController,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: contentPadding ? 16 : 0,
-                      ),
-                      child: body,
-                    ),
-                  )
-                : Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: contentPadding ? 16 : 0,
-                    ),
-                    child: body,
-                  ),
+            body: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: contentPadding ? 16 : 0,
+              ),
+              child: body,
+            ),
           ),
         ),
       ),

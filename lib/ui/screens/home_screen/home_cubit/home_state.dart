@@ -6,7 +6,8 @@ final class HomeInitialState extends HomeState {}
 
 final class HomeLoadingState extends HomeState {}
 
-final class HomeLoadedState extends HomeState {
-  HomeLoadedState(this.data);
-  final List<String> data;
+final class HomeDrawState extends HomeState {
+  HomeDrawState({required this.history});
+
+  final List<String> history;
 }

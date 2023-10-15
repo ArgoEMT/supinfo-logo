@@ -142,4 +142,5 @@ enum InstructionEnum {
         throw Exception('String entered is not a valid instruction');
     }
   }
+
 }
