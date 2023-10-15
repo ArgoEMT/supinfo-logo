@@ -15,11 +15,12 @@ class InstructionPainter extends CustomPainter {
       ),
     );
   }
-  final List<InstructionPainterHistoryItem> _points = [];
 
-  Offset get lastOffset => _points.last.offset;
-
+  /// The current color of the trail
   Color _currentColor;
+
+  /// List of points to draw with the color of the trail
+  final List<InstructionPainterHistoryItem> _points = [];
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -27,35 +28,43 @@ class InstructionPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 5.0;
     for (int i = 0; i < _points.length - 1; i++) {
-      paint.color = _points[i].trailColor;
+      paint.color = _points[i + 1].trailColor;
       canvas.drawLine(_points[i].offset, _points[i + 1].offset, paint);
     }
-  }
-
-  void addOffsets(List<Offset> offsets) {
-    _points.addAll(offsets.map(
-      (e) => InstructionPainterHistoryItem(
-        offset: e,
-        trailColor: _currentColor,
-      ),
-    ));
-  }
-
-  void changeTrailColor(Color color) {
-    _currentColor = color;
   }
 
   @override
   bool shouldRepaint(InstructionPainter oldDelegate) =>
       oldDelegate._points != _points;
+
+  /// Add a new point to the list
+  void addOffset(Offset offset) {
+    _points.add(InstructionPainterHistoryItem(
+      offset: offset,
+      trailColor: _currentColor,
+    ));
+  }
+
+  /// Change the color of the trail
+  void changeTrailColor(Color color) {
+    _currentColor = color;
+  }
+
+  /// Clear the list of points
+  void clear() {
+    _points.clear();
+  }
 }
 
 class InstructionPainterHistoryItem {
-  final Offset offset;
-  final Color trailColor;
-
   const InstructionPainterHistoryItem({
     required this.offset,
     required this.trailColor,
   });
+
+  /// The offset of the point
+  final Offset offset;
+
+  /// The color of the trail
+  final Color trailColor;
 }

@@ -4,6 +4,8 @@ import '../../../../core/models/logo_model.dart';
 
 import '../../../../core/constants/painter_constants.dart';
 
+import 'dart:math' as math;
+
 class LogoPainter extends StatelessWidget {
   const LogoPainter({
     super.key,
@@ -13,6 +15,18 @@ class LogoPainter extends StatelessWidget {
 
   final LogoModel model;
   final Color backgroundColor;
+
+  /// Calculate the angle of the cursor
+  double get _angle => model.angle == 0 ? 0 : math.pi / 180 * model.angle;
+
+  String get calculatedPosition {
+    final y = model.cursorPosition.dy == PainterConstants.painterHeight / 2
+        ? 0
+        : -(model.cursorPosition.dy - PainterConstants.painterHeight / 2)
+            as int;
+
+    return 'x: ${model.cursorPosition.dx - PainterConstants.painterHeight / 2}, y: $y';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +46,33 @@ class LogoPainter extends StatelessWidget {
             painter: model.painter,
           ),
         ),
-        Positioned(
-          top: model.lastOffset.dy - 15,
-          left: model.lastOffset.dx - 15,
-          child: Transform.rotate(
-            angle: model.angle,
-            child: const Icon(
-              Icons.keyboard_arrow_up_rounded,
-              size: 30,
-              color: Colors.white,
+        if (model.showCursor)
+          Positioned(
+            top: model.cursorPosition.dy - 15,
+            left: model.cursorPosition.dx - 15,
+            child: Transform.rotate(
+              angle: _angle,
+              child: const Icon(
+                Icons.keyboard_arrow_up_rounded,
+                size: 30,
+                color: appPink,
+              ),
             ),
           ),
-        ),
-        Positioned(
-          top: model.lastOffset.dy - 10,
-          left: model.lastOffset.dx - 10,
-          child: Transform.rotate(
-            angle: model.angle,
-            child: Icon(
-              Icons.keyboard_arrow_up_rounded,
-              size: 20,
-              color: model.trailColor,
+        Align(
+          alignment: Alignment.bottomLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Angle: ${model.angle}'),
+                Text('Position: ($calculatedPosition)'),
+                const Text(
+                  'Taille de la zone: ${PainterConstants.painterHeight} x ${PainterConstants.painterWidth}',
+                )
+              ],
             ),
           ),
         ),

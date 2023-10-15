@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_template/core/helpers/instruction_painter.dart';
 
-import '../../../../core/helpers/instruction_interpretor_helper.dart';
 import '../../../../core/models/logo_model.dart';
 
 part 'home_state.dart';

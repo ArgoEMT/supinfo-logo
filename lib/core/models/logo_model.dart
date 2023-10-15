@@ -1,55 +1,116 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/helpers/instruction_interpretor_helper.dart';
 
 import '../../config/theme/app_colors.dart';
 import '../constants/painter_constants.dart';
+import '../helpers/instruction_interpretor.dart';
 import '../helpers/instruction_painter.dart';
+import '../helpers/instruction_translator.dart';
 import 'instruction/base_instruction_model.dart';
 
 class LogoModel {
   LogoModel({
-    this.position = const Offset(
+    this.cursorPosition = const Offset(
       PainterConstants.painterHeight / 2,
       PainterConstants.painterWidth / 2,
     ),
     this.angle = 0,
     this.trailColor = appPurple,
     this.backgroundColor = appbackgroundColor,
-  }) {
+  }) : _lastColor = trailColor {
     painter = InstructionPainter(trailColor: trailColor);
   }
 
-  final List<BaseInstructionModel> history = [];
-
   /// The angle of the turtle
-  double angle;
+  int angle;
 
   /// The background color of the canvas
   Color backgroundColor;
 
   /// The position of the turtle
-  Offset position;
+  Offset cursorPosition;
+
+  /// The history of the instructions
+  final List<BaseInstructionModel> history = [];
+
+  /// The painter to draw the trail
+  late final InstructionPainter painter;
+
+  Color _lastColor;
 
   /// The color of the trail
   Color trailColor;
 
-  late final InstructionPainter painter;
+  /// If the cursor should be shown
+  var showCursor = true;
 
+  /// The history of the instructions as a string
   List<String> get historyString =>
       history.map((e) => e.instructionToString()).toList();
 
+  /// Add a new instruction to the history and run it
   void addInstruction(String instruction) {
-    final instructionObject =
-        InstructionInterpretorHelper.translateToLogoInstruction(
+    final instructionModel = InstructionTranslator.translateToLogoInstruction(
       instruction,
     );
-    history.add(instructionObject);
-    final newOffset = InstructionInterpretorHelper.calculatePosition(
-      instructionModel: instructionObject,
+    history.add(instructionModel);
+    InstructionInterpretor.runInstruction(
       model: this,
+      instructionModel: instructionModel,
     );
-    painter.addOffsets(newOffset);
   }
 
-  Offset get lastOffset => painter.lastOffset;
+  /// Add a new point to the painter
+  void addOffset(Offset offset) {
+    print('x: ${offset.dx}, y: ${offset.dy}');
+    painter.addOffset(offset);
+    cursorPosition = offset;
+  }
+
+  /// Clear the trails but keep the cursor position
+  void clearPainter() {
+    painter.clear();
+    addOffset(cursorPosition);
+  }
+
+  /// Clear the trails and reset the cursor position
+  void resetPainter() {
+    cursorPosition = const Offset(
+      PainterConstants.painterHeight / 2,
+      PainterConstants.painterWidth / 2,
+    );
+    clearPainter();
+  }
+  
+  /// Reset the cursor position without clearing the trails
+  void resetPosition() {
+    const center =  Offset(
+      PainterConstants.painterHeight / 2,
+      PainterConstants.painterWidth / 2,
+    );
+    jumpTo(center);
+  }
+
+  /// Change the color of the next trails
+  void changeTrailColor(Color color) {
+    trailColor = color;
+    painter.changeTrailColor(color);
+  }
+
+  /// Change the visibility of the next trails
+  void setTrailVisible(bool visible) {
+    if (visible) {
+      changeTrailColor(_lastColor);
+    } else {
+      _lastColor = trailColor;
+      changeTrailColor(Colors.transparent);
+    }
+  }
+
+  /// Jump to a new position without drawing a trail
+  void jumpTo(Offset offset) {
+    cursorPosition = offset;
+    setTrailVisible(false);
+    addOffset(cursorPosition);
+    setTrailVisible(true);
+  }
 }
