@@ -54,43 +54,43 @@ enum InstructionEnum {
   String toString() {
     switch (this) {
       case av:
-        return 'av';
+        return 'AV';
       case re:
-        return 're';
+        return 'RE';
       case td:
-        return 'td';
+        return 'TD';
       case tg:
-        return 'tg';
+        return 'TG';
       case lc:
-        return 'lc';
+        return 'LC';
       case bc:
-        return 'bc';
+        return 'BC';
       case ct:
-        return 'ct';
+        return 'CT';
       case mt:
-        return 'mt';
+        return 'MT';
       case ve:
-        return 've';
+        return 'VE';
       case nettoie:
-        return 'nettoie';
+        return 'NETTOIE';
       case origine:
-        return 'origine';
+        return 'ORIGINE';
       case vt:
-        return 'vt';
+        return 'VT';
       case fcc:
-        return 'fcc';
+        return 'FCC';
       case fcb:
-        return 'fcb';
+        return 'FCB';
       case fcap:
-        return 'fcap';
+        return 'FCAP';
       case cap:
-        return 'cap';
+        return 'CAP';
       case fpos:
-        return 'fpos';
+        return 'FPOS';
       case position:
-        return 'position';
+        return 'POSITION';
       case repete:
-        return 'repete';
+        return 'REPETE';
       default:
         return '';
     }
@@ -142,5 +142,4 @@ enum InstructionEnum {
         throw Exception('String entered is not a valid instruction');
     }
   }
-
 }
