@@ -53,7 +53,7 @@ class LogoModel {
       history.map((e) => e.instructionToString()).toList();
 
   /// Add a new instruction to the history and run it.
-  /// 
+  ///
   /// If the instruction is a for instruction, it will be stored in the [forInstruction]
   /// If the instruction is already stored in the [forInstruction], it will be removed
   /// and replaced by the new one
@@ -105,7 +105,7 @@ class LogoModel {
   /// Check if the [instruction] is stored in the [forInstruction]
   bool checkIfInstructionIsDeclared(String instruction) {
     final instructionName = instruction.split(' ')[0];
-    
+
     final instructionPresent = forInstruction
         .any((element) => element.instructionName == instructionName);
 
@@ -132,6 +132,7 @@ class LogoModel {
       PainterConstants.painterSize / 2,
       PainterConstants.painterSize / 2,
     );
+    angle = 0;
     clearPainter();
   }
 

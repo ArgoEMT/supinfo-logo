@@ -117,7 +117,7 @@ class InstructionInterpretor {
         PainterConstants.painterSize / 2,
       );
       final x = double.parse(instructionModel.parameters[0]) * multiplier;
-      final y = double.parse(instructionModel.parameters[1]) * multiplier;
+      final y = -double.parse(instructionModel.parameters[1]) * multiplier;
       final position = Offset(x, y) + centerOffset;
       model.jumpTo(position);
     }
