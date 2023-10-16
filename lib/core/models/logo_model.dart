@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_template/core/models/instruction/for_instruction_model.dart';
 
 import '../../config/theme/app_colors.dart';
 import '../constants/painter_constants.dart';
@@ -30,7 +31,7 @@ class LogoModel {
   Offset cursorPosition;
 
   /// The history of the instructions
-  final List<BaseInstructionModel> history = [];
+  final history = <BaseInstructionModel>[];
 
   /// The painter to draw the trail
   late final InstructionPainter painter;
@@ -43,20 +44,50 @@ class LogoModel {
   /// If the cursor should be shown
   var showCursor = true;
 
+  /// The stored for instructions
+  final forInstruction = <ForInstructionModel>[];
+
   /// The history of the instructions as a string
   List<String> get historyString =>
       history.map((e) => e.instructionToString()).toList();
 
   /// Add a new instruction to the history and run it
   void addInstruction(String instruction) {
-    final instructionModel = InstructionTranslator.translateToLogoInstruction(
-      instruction,
-    );
+    if (checkIfInstructionIsDeclared(instruction)) {
+      InstructionInterpretor.runForInstruction(
+        model: this,
+        instruction: instruction,
+      );
+    } else {
+      final instructionModel = InstructionTranslator.translateToLogoInstruction(
+        instruction,
+      );
+      if (instructionModel is ForInstructionModel) {
+        forInstruction.add(instructionModel);
+        return;
+      }
+      addInstructionToHistory(instructionModel);
+      InstructionInterpretor.runInstruction(
+        model: this,
+        instructionModel: instructionModel,
+      );
+    }
+  }
+
+  /// Add a new instruction to the history
+  void addInstructionToHistory(BaseInstructionModel instructionModel) {
     history.add(instructionModel);
-    InstructionInterpretor.runInstruction(
-      model: this,
-      instructionModel: instructionModel,
-    );
+  }
+
+  /// Check if the [instruction] is stored in the [forInstruction]
+  bool checkIfInstructionIsDeclared(String instruction) {
+    final instructionName = instruction.split(' ')[0];
+    print('instructionName: $instructionName');
+    final instructionPresent = forInstruction
+        .any((element) => element.instructionName == instructionName);
+
+    print('instructionPresent: $instructionPresent');
+    return instructionPresent;
   }
 
   /// Add a new point to the painter
@@ -80,10 +111,10 @@ class LogoModel {
     );
     clearPainter();
   }
-  
+
   /// Reset the cursor position without clearing the trails
   void resetPosition() {
-    const center =  Offset(
+    const center = Offset(
       PainterConstants.painterHeight / 2,
       PainterConstants.painterWidth / 2,
     );

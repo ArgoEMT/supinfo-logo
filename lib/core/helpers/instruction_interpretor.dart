@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc_template/core/models/instruction/executable_for_instruction.dart';
 
 import '../constants/painter_constants.dart';
 import '../enum/instruction_enum.dart';
@@ -17,8 +18,8 @@ class InstructionInterpretor {
   ) {
     if (instructionModel is LogoInstructionModel) {
       final distance = instructionModel.instruction == InstructionEnum.av
-          ? instructionModel.parameters.first
-          : -instructionModel.parameters.first;
+          ? instructionModel.parametersAsInt.first
+          : -instructionModel.parametersAsInt.first;
       final angle = model.angle;
       final position = model.cursorPosition;
       final x = position.dx + distance * sin(angle * pi / 180);
@@ -34,7 +35,7 @@ class InstructionInterpretor {
     BaseInstructionModel instructionModel,
   ) {
     if (instructionModel is LogoInstructionModel) {
-      final newAngle = instructionModel.parameters.first % 360;
+      final newAngle = instructionModel.parametersAsInt.first % 360;
       model.angle = newAngle;
       debugPrint('new angle: ${model.angle}');
     }
@@ -46,9 +47,9 @@ class InstructionInterpretor {
     BaseInstructionModel instructionModel,
   ) {
     if (instructionModel is LogoInstructionModel) {
-      final r = instructionModel.parameters[0];
-      final g = instructionModel.parameters[1];
-      final b = instructionModel.parameters[2];
+      final r = instructionModel.parametersAsInt[0];
+      final g = instructionModel.parametersAsInt[1];
+      final b = instructionModel.parametersAsInt[2];
       final newColor = Color.fromRGBO(r, g, b, 1);
       debugPrint('new color: $newColor');
       if (instructionModel.instruction == InstructionEnum.fcc) {
@@ -69,6 +70,23 @@ class InstructionInterpretor {
     }
   }
 
+  /// Invert the angle of the cursor
+  static void _invertAngle(LogoModel model) {
+    model.angle = (model.angle + 180) % 360;
+  }
+
+  /// Invert the position of the cursor
+  static void _invertPosition(LogoModel model) {
+    final position = model.cursorPosition;
+    debugPrint('current position: $position');
+    final x = PainterConstants.painterHeight - position.dx;
+    final y = PainterConstants.painterWidth - position.dy;
+
+    final newOffset = Offset(x, y);
+    debugPrint('new position: $newOffset');
+    model.jumpTo(newOffset);
+  }
+
   /// Rotate the cursor
   static void _rotateCursor(
     LogoModel model,
@@ -77,13 +95,14 @@ class InstructionInterpretor {
     if (instructionModel is LogoInstructionModel) {
       final angle = model.angle;
       final rotation = instructionModel.instruction == InstructionEnum.td
-          ? instructionModel.parameters.first
-          : -instructionModel.parameters.first;
+          ? instructionModel.parametersAsInt.first
+          : -instructionModel.parametersAsInt.first;
       model.angle = (angle + rotation) % 360;
       debugPrint('new angle: ${model.angle}');
     }
   }
 
+  /// Set the position of the cursor
   static void _setCursorCoordonate(
     LogoModel model,
     BaseInstructionModel instructionModel,
@@ -100,19 +119,29 @@ class InstructionInterpretor {
     }
   }
 
-  static void _invertAngle(LogoModel model) {
-    model.angle = (model.angle + 180) % 360;
-  }
-
-  static void _invertPosition(LogoModel model) {
-    final position = model.cursorPosition;
-    debugPrint('current position: $position');
-    final x = PainterConstants.painterHeight - position.dx;
-    final y = PainterConstants.painterWidth - position.dy;
-
-    final newOffset = Offset(x, y);
-    debugPrint('new position: $newOffset');
-    model.jumpTo(newOffset);
+  /// Run a for instruction.
+  /// 
+  /// - Get the [ForInstructionModel] from the [LogoModel].
+  /// - Extract the values from the instruction string.
+  /// - Create a list of [ExecutableForInstruction] with the values.
+  /// - Run the instructions.
+  /// - Add the [ExecutableForInstruction] to the history.
+  static void runForInstruction({
+    required LogoModel model,
+    required String instruction,
+  }) {
+    final instructionName = instruction.split(' ')[0];
+    final values = instruction.split(' ').sublist(1).toList();
+    final baseInstruction = model.forInstruction
+        .firstWhere((element) => element.instructionName == instructionName);
+    final executableInstruction = ExecutableForInstruction(
+      baseInstruction: baseInstruction,
+      values: values,
+    );
+    for (var instruction in executableInstruction.getInstructionWithValue()) {
+      runInstruction(model: model, instructionModel: instruction);
+    }
+    model.addInstructionToHistory(executableInstruction);
   }
 
   /// Run an instruction
@@ -121,8 +150,10 @@ class InstructionInterpretor {
     required BaseInstructionModel instructionModel,
   }) {
     if (instructionModel is RepeteInstructionModel) {
-      for (var instruction in instructionModel.parameters) {
-        runInstruction(model: model, instructionModel: instruction);
+      for (var i = 0; i < instructionModel.count; i++) {
+        for (var instruction in instructionModel.parameters) {
+          runInstruction(model: model, instructionModel: instruction);
+        }
       }
     } else if (instructionModel is LogoInstructionModel) {
       switch (instructionModel.instruction) {

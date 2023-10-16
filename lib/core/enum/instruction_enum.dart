@@ -17,6 +17,7 @@ enum InstructionEnum {
   cap,
   fpos,
   repete,
+  pour,
   position;
 
   int get parameterCount {
@@ -44,6 +45,8 @@ enum InstructionEnum {
       case position:
         return 0;
       case repete:
+        return -1;
+      case pour:
         return -1;
       default:
         return 0;
@@ -91,6 +94,8 @@ enum InstructionEnum {
         return 'POSITION';
       case repete:
         return 'REPETE';
+      case pour:
+        return 'POUR';
       default:
         return '';
     }
@@ -138,6 +143,8 @@ enum InstructionEnum {
         return InstructionEnum.position;
       case 'repete':
         return InstructionEnum.repete;
+      case 'pour':
+        return InstructionEnum.pour;
       default:
         throw Exception('String entered is not a valid instruction');
     }

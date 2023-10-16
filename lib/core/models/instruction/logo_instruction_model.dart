@@ -9,7 +9,7 @@ class LogoInstructionModel extends BaseInstructionModel {
   final InstructionEnum instruction;
 
   /// The parameters of the instruction
-  final List<int> parameters;
+  final List<String> parameters;
 
   @override
   String instructionToString() {
@@ -19,7 +19,23 @@ class LogoInstructionModel extends BaseInstructionModel {
   }
 
   @override
-  bool validate(){
+  bool validate() {
     return parameters.length == instruction.parameterCount;
+  }
+
+  /// Getter for the parameters as int
+  List<int> get parametersAsInt {
+    return parameters.map((e) => int.tryParse(e) ?? -1).toList();
+  }
+
+  @override
+  LogoInstructionModel copyWith({
+    InstructionEnum? instruction,
+    List<String>? parameters,
+  }) {
+    return LogoInstructionModel(
+      instruction: instruction ?? this.instruction,
+      parameters: parameters ?? this.parameters,
+    );
   }
 }

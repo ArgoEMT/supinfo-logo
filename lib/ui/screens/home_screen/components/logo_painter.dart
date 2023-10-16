@@ -23,7 +23,7 @@ class LogoPainter extends StatelessWidget {
     final y = model.cursorPosition.dy == PainterConstants.painterHeight / 2
         ? 0
         : -(model.cursorPosition.dy - PainterConstants.painterHeight / 2)
-            as int;
+            ;
 
     return 'x: ${model.cursorPosition.dx - PainterConstants.painterHeight / 2}, y: $y';
   }
