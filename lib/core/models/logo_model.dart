@@ -94,6 +94,7 @@ class LogoModel {
   void addOffset(Offset offset) {
     painter.addOffset(offset);
     cursorPosition = offset;
+    //TODO: prevent the cursor from going out of the canvas
   }
 
   /// Change the color of the next trails

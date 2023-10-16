@@ -30,6 +30,8 @@ class TemplateAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(100);
 
+  static double get height => 100.0;
+
   @override
   Widget build(BuildContext context) {
     final color = backgroundColor ?? appWhite;

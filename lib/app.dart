@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     ]);
 
     return MultiBlocProvider(
-      providers: BlocSetup.globalBlocs,
+      providers: BlocSetup.getBlocs(context),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: GetIt.I<NavigationService>().navigatorKey,

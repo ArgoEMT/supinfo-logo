@@ -51,6 +51,13 @@ const normal14White = TextStyle(
   color: appWhite,
 );
 
+/// Color: [appGreen] - FontSize: 14 - FontWeight: 400
+const normal14Green = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontSize: 14,
+  color: appGreen,
+);
+
 /// Color: [appWhite] - FontSize: 14 - FontWeight: 600
 const TextStyle bold14White = TextStyle(
   fontSize: 14,
@@ -77,10 +84,26 @@ const normal16Purple = TextStyle(
   color: appPurple,
 );
 
+/// Color: [appPurple] - FontSize: 16 - FontWeight: 400
+const normal16Background = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Inter',
+  color: appbackgroundColor,
+);
+
 /// Color: [appWhite] - FontSize: 16 - FontWeight: 400
 const normal16White = TextStyle(
   fontSize: 16,
   color: appWhite,
+  fontWeight: FontWeight.w400,
+  fontFamily: 'Inter',
+);
+
+/// Color: [appGreen] - FontSize: 16 - FontWeight: 400
+const normal16Green = TextStyle(
+  fontSize: 16,
+  color: appGreen,
   fontWeight: FontWeight.w400,
   fontFamily: 'Inter',
 );

@@ -15,6 +15,7 @@ dependencies:
   flutter:
     sdk: flutter
   isar: ^3.1.0+1
+  flutter_code_editor: ^0.3.0
 
 dev_dependencies:
   flutter_test:
