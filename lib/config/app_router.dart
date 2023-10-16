@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../ui/screens/home_screen/home_screen.dart';
+import '../ui/screens/console_screen/console_screen.dart';
+import '../ui/screens/script_screen/script_screen.dart';
 
 class AppRouter {
   static MaterialPageRoute<T> routeBuilder<T extends Object?>({
@@ -22,9 +23,15 @@ class AppRouter {
     var name = settings.name;
 
     switch (name) {
-      case RoutePaths.home:
+      case RoutePaths.console:
         return routeBuilder(
-          target: const HomeScreen(),
+          target: const ConsoleScreen(),
+          settings: settings,
+        );
+
+      case RoutePaths.script:
+        return routeBuilder(
+          target: const ScriptScreen(),
           settings: settings,
         );
 
@@ -43,7 +50,7 @@ class AppRouter {
                   SizedBox(
                     width: 150,
                     child: OutlinedButton(
-                      onPressed: () => context.go(RoutePaths.home),
+                      onPressed: () => context.go(RoutePaths.console),
                       child: const Text("Aller à l'accueil"),
                     ),
                   ),
@@ -78,7 +85,8 @@ class CustomPageRoute<T extends Object?> extends MaterialPageRoute<T> {
 }
 
 class RoutePaths {
-  static const home = '/';
+  static const console = '/';
+  static const script = '/script';
 }
 
 extension NavigationExtension on BuildContext {
@@ -117,7 +125,7 @@ extension NavigationExtension on BuildContext {
     if (canPop) {
       Navigator.pop(this, result);
     } else {
-      quitTo(RoutePaths.home);
+      quitTo(RoutePaths.console);
     }
   }
 
@@ -125,7 +133,7 @@ extension NavigationExtension on BuildContext {
     if (canPop) {
       Navigator.popUntil(this, ModalRoute.withName(routeName));
     } else {
-      quitTo(RoutePaths.home);
+      quitTo(RoutePaths.console);
     }
   }
 

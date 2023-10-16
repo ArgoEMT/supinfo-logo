@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../config/theme/app_colors.dart';
-import '../../../../core/models/logo_model.dart';
+import '../../config/theme/app_colors.dart';
+import '../../core/models/logo_model.dart';
 
-import '../../../../core/constants/painter_constants.dart';
+import '../../core/constants/painter_constants.dart';
 
 import 'dart:math' as math;
 
@@ -20,12 +20,14 @@ class LogoPainter extends StatelessWidget {
   double get _angle => model.angle == 0 ? 0 : math.pi / 180 * model.angle;
 
   String get calculatedPosition {
-    final y = model.cursorPosition.dy == PainterConstants.painterHeight / 2
+    final y = model.cursorPosition.dy == PainterConstants.painterSize / 2
         ? 0
-        : -(model.cursorPosition.dy - PainterConstants.painterHeight / 2)
-            ;
+        : -(model.cursorPosition.dy - PainterConstants.painterSize / 2) / 3;
+    final x = model.cursorPosition.dx == PainterConstants.painterSize / 2
+        ? 0
+        : (model.cursorPosition.dx - PainterConstants.painterSize / 2) / 3;
 
-    return 'x: ${model.cursorPosition.dx - PainterConstants.painterHeight / 2}, y: $y';
+    return 'x: $x, y: $y';
   }
 
   @override
@@ -39,8 +41,8 @@ class LogoPainter extends StatelessWidget {
           ),
           child: CustomPaint(
             size: const Size(
-              PainterConstants.painterHeight,
-              PainterConstants.painterWidth,
+              PainterConstants.painterSize,
+              PainterConstants.painterSize,
             ),
             willChange: true,
             painter: model.painter,
@@ -69,9 +71,6 @@ class LogoPainter extends StatelessWidget {
               children: [
                 Text('Angle: ${model.angle}'),
                 Text('Position: ($calculatedPosition)'),
-                const Text(
-                  'Taille de la zone: ${PainterConstants.painterHeight} x ${PainterConstants.painterWidth}',
-                )
               ],
             ),
           ),

@@ -1,4 +1,7 @@
 class PainterConstants {
-  static const painterHeight = 750.0;
-  static const painterWidth = 750.0;
+  static const painterSize = 750.0;
+
+  static const _targetSize = 250.0;
+
+  static double get multiplier => painterSize / _targetSize;
 }

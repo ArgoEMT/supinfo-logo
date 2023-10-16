@@ -11,8 +11,8 @@ import 'instruction/base_instruction_model.dart';
 class LogoModel {
   LogoModel({
     this.cursorPosition = const Offset(
-      PainterConstants.painterHeight / 2,
-      PainterConstants.painterWidth / 2,
+      PainterConstants.painterSize / 2,
+      PainterConstants.painterSize / 2,
     ),
     this.angle = 0,
     this.trailColor = appPurple,
@@ -20,6 +20,9 @@ class LogoModel {
   }) : _lastColor = trailColor {
     painter = InstructionPainter(trailColor: trailColor);
   }
+
+  /// The last color of the trail
+  Color _lastColor;
 
   /// The angle of the turtle
   int angle;
@@ -30,28 +33,30 @@ class LogoModel {
   /// The position of the turtle
   Offset cursorPosition;
 
+  /// The stored for instructions
+  final forInstruction = <ForInstructionModel>[];
+
   /// The history of the instructions
   final history = <BaseInstructionModel>[];
 
   /// The painter to draw the trail
   late final InstructionPainter painter;
 
-  Color _lastColor;
-
-  /// The color of the trail
-  Color trailColor;
-
   /// If the cursor should be shown
   var showCursor = true;
 
-  /// The stored for instructions
-  final forInstruction = <ForInstructionModel>[];
+  /// The color of the trail
+  Color trailColor;
 
   /// The history of the instructions as a string
   List<String> get historyString =>
       history.map((e) => e.instructionToString()).toList();
 
-  /// Add a new instruction to the history and run it
+  /// Add a new instruction to the history and run it.
+  /// 
+  /// If the instruction is a for instruction, it will be stored in the [forInstruction]
+  /// If the instruction is already stored in the [forInstruction], it will be removed
+  /// and replaced by the new one
   void addInstruction(String instruction) {
     if (checkIfInstructionIsDeclared(instruction)) {
       InstructionInterpretor.runForInstruction(
@@ -63,6 +68,12 @@ class LogoModel {
         instruction,
       );
       if (instructionModel is ForInstructionModel) {
+        if (checkIfInstructionIsDeclared(instructionModel.instructionName)) {
+          forInstruction.removeWhere(
+            (element) =>
+                element.instructionName == instructionModel.instructionName,
+          );
+        }
         forInstruction.add(instructionModel);
         return;
       }
@@ -79,22 +90,26 @@ class LogoModel {
     history.add(instructionModel);
   }
 
+  /// Add a new point to the painter
+  void addOffset(Offset offset) {
+    painter.addOffset(offset);
+    cursorPosition = offset;
+  }
+
+  /// Change the color of the next trails
+  void changeTrailColor(Color color) {
+    trailColor = color;
+    painter.changeTrailColor(color);
+  }
+
   /// Check if the [instruction] is stored in the [forInstruction]
   bool checkIfInstructionIsDeclared(String instruction) {
     final instructionName = instruction.split(' ')[0];
-    print('instructionName: $instructionName');
+    
     final instructionPresent = forInstruction
         .any((element) => element.instructionName == instructionName);
 
-    print('instructionPresent: $instructionPresent');
     return instructionPresent;
-  }
-
-  /// Add a new point to the painter
-  void addOffset(Offset offset) {
-    print('x: ${offset.dx}, y: ${offset.dy}');
-    painter.addOffset(offset);
-    cursorPosition = offset;
   }
 
   /// Clear the trails but keep the cursor position
@@ -103,11 +118,19 @@ class LogoModel {
     addOffset(cursorPosition);
   }
 
+  /// Jump to a new position without drawing a trail
+  void jumpTo(Offset offset) {
+    cursorPosition = offset;
+    setTrailVisible(false);
+    addOffset(cursorPosition);
+    setTrailVisible(true);
+  }
+
   /// Clear the trails and reset the cursor position
   void resetPainter() {
     cursorPosition = const Offset(
-      PainterConstants.painterHeight / 2,
-      PainterConstants.painterWidth / 2,
+      PainterConstants.painterSize / 2,
+      PainterConstants.painterSize / 2,
     );
     clearPainter();
   }
@@ -115,16 +138,10 @@ class LogoModel {
   /// Reset the cursor position without clearing the trails
   void resetPosition() {
     const center = Offset(
-      PainterConstants.painterHeight / 2,
-      PainterConstants.painterWidth / 2,
+      PainterConstants.painterSize / 2,
+      PainterConstants.painterSize / 2,
     );
     jumpTo(center);
-  }
-
-  /// Change the color of the next trails
-  void changeTrailColor(Color color) {
-    trailColor = color;
-    painter.changeTrailColor(color);
   }
 
   /// Change the visibility of the next trails
@@ -135,13 +152,5 @@ class LogoModel {
       _lastColor = trailColor;
       changeTrailColor(Colors.transparent);
     }
-  }
-
-  /// Jump to a new position without drawing a trail
-  void jumpTo(Offset offset) {
-    cursorPosition = offset;
-    setTrailVisible(false);
-    addOffset(cursorPosition);
-    setTrailVisible(true);
   }
 }

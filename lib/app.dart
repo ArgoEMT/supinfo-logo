@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           return [
             AppRouter.generateRoute(
               const RouteSettings(
-                name: RoutePaths.home,
+                name: RoutePaths.console,
               ),
             ),
           ];

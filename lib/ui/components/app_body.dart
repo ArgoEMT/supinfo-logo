@@ -51,7 +51,7 @@ class AppBody extends StatelessWidget {
             if (context.canPop) {
               context.pop();
             } else {
-              await context.go(RoutePaths.home);
+              await context.go(RoutePaths.console);
             }
             return Future.value(false);
           },

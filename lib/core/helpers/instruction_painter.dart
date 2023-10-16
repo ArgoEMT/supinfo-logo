@@ -8,8 +8,8 @@ class InstructionPainter extends CustomPainter {
     _points.add(
       InstructionPainterHistoryItem(
         offset: const Offset(
-          PainterConstants.painterHeight / 2,
-          PainterConstants.painterWidth / 2,
+          PainterConstants.painterSize / 2,
+          PainterConstants.painterSize / 2,
         ),
         trailColor: trailColor,
       ),

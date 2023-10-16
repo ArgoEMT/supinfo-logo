@@ -3,30 +3,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants/painter_constants.dart';
 import '../../components/app_body.dart';
-import 'components/console_widget.dart';
-import 'components/history_list.dart';
-import 'components/logo_painter.dart';
-import 'home_cubit/home_cubit.dart';
+import '../../components/logo_painter.dart';
+import 'script_cubit/script_cubit.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class ScriptScreen extends StatelessWidget {
+  const ScriptScreen({super.key});
 
-  @override
+    @override
   Widget build(BuildContext context) {
-    final cubit = HomeCubit()..init();
+    final cubit = ScriptCubit()..init();
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: AppBody(
-        title: 'Home',
+        title: 'Interpréteur console',
         body: Padding(
           padding: const EdgeInsets.all(24.0),
           child: BlocBuilder(
             bloc: cubit,
-            builder: (BuildContext context, HomeState state) {
-              if (state is HomeInitialState || state is HomeLoadingState) {
+            builder: (BuildContext context, ScriptState state) {
+              if (state is ScriptInitialState || state is ScriptLoadingState) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is HomeDrawState) {
+              } else if (state is ScriptDrawState) {
                 return SingleChildScrollView(
                   child: Center(
                     child: SizedBox(
@@ -37,24 +35,17 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             children: [
                               SizedBox(
-                                width: PainterConstants.painterHeight,
-                                height: PainterConstants.painterWidth,
+                                width: PainterConstants.painterSize,
+                                height: PainterConstants.painterSize,
                                 child: LogoPainter(
                                   backgroundColor: cubit.backgroundColor,
                                   model: cubit.logoModel,
                                 ),
                               ),
                               const SizedBox(width: 24),
-                              Expanded(
-                                child: HistoryList(history: state.history),
-                              ),
                             ],
                           ),
                           const SizedBox(height: 24),
-                          ConsoleWidget(
-                            onSaved: cubit.addInstruction,
-                            focusNode: cubit.focusNode,
-                          ),
                         ],
                       ),
                     ),
