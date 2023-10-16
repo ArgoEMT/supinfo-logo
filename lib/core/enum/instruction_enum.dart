@@ -17,6 +17,7 @@ enum InstructionEnum {
   cap,
   fpos,
   repete,
+  pour,
   position;
 
   int get parameterCount {
@@ -45,6 +46,8 @@ enum InstructionEnum {
         return 0;
       case repete:
         return -1;
+      case pour:
+        return -1;
       default:
         return 0;
     }
@@ -54,43 +57,45 @@ enum InstructionEnum {
   String toString() {
     switch (this) {
       case av:
-        return 'av';
+        return 'AV';
       case re:
-        return 're';
+        return 'RE';
       case td:
-        return 'td';
+        return 'TD';
       case tg:
-        return 'tg';
+        return 'TG';
       case lc:
-        return 'lc';
+        return 'LC';
       case bc:
-        return 'bc';
+        return 'BC';
       case ct:
-        return 'ct';
+        return 'CT';
       case mt:
-        return 'mt';
+        return 'MT';
       case ve:
-        return 've';
+        return 'VE';
       case nettoie:
-        return 'nettoie';
+        return 'NETTOIE';
       case origine:
-        return 'origine';
+        return 'ORIGINE';
       case vt:
-        return 'vt';
+        return 'VT';
       case fcc:
-        return 'fcc';
+        return 'FCC';
       case fcb:
-        return 'fcb';
+        return 'FCB';
       case fcap:
-        return 'fcap';
+        return 'FCAP';
       case cap:
-        return 'cap';
+        return 'CAP';
       case fpos:
-        return 'fpos';
+        return 'FPOS';
       case position:
-        return 'position';
+        return 'POSITION';
       case repete:
-        return 'repete';
+        return 'REPETE';
+      case pour:
+        return 'POUR';
       default:
         return '';
     }
@@ -138,9 +143,10 @@ enum InstructionEnum {
         return InstructionEnum.position;
       case 'repete':
         return InstructionEnum.repete;
+      case 'pour':
+        return InstructionEnum.pour;
       default:
         throw Exception('String entered is not a valid instruction');
     }
   }
-
 }

@@ -6,5 +6,5 @@ abstract class BaseInstructionModel {
   /// Check the validity of the instruction
   bool validate();
 
-  //TODO: create the FOR instruction
+  BaseInstructionModel copyWith();
 }

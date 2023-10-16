@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class ConsoleWidget extends StatelessWidget {
@@ -19,7 +18,7 @@ class ConsoleWidget extends StatelessWidget {
           child: TextField(
             focusNode: focusNode,
             controller: controller,
-            onSubmitted: onSaved,
+            onSubmitted: (value) => onSaved(value.toLowerCase()),
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               hintText: 'Entrez une instruction',
@@ -30,7 +29,7 @@ class ConsoleWidget extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             if (controller.text.isEmpty) return;
-            onSaved(controller.text);
+            onSaved(controller.text.toLowerCase());
           },
           child: const Text('Envoyer'),
         ),

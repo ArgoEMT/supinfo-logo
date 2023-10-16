@@ -13,15 +13,22 @@ class RepeteInstructionModel extends BaseInstructionModel {
 
   @override
   String instructionToString() {
-    String parametersString = parameters.map((e) => e.instructionToString()).join(' ');
-    for(int i = 0; i < count; i++){
-      parametersString += parameters.map((e) => e.instructionToString()).join(' ');
-    }
-    return parametersString;
+    return 'REPETE $count [${parameters.map((e) => e.instructionToString()).join(' ')}]';
   }
 
   @override
   bool validate() {
     return parameters.isNotEmpty && count > 0;
+  }
+
+  @override
+  RepeteInstructionModel copyWith({
+    int? count,
+    List<LogoInstructionModel>? parameters,
+  }) {
+    return RepeteInstructionModel(
+      count: count ?? this.count,
+      parameters: parameters ?? this.parameters,
+    );
   }
 }
