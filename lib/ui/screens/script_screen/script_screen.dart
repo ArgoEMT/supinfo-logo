@@ -16,7 +16,6 @@ class ScriptScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = ScriptCubit()..init();
-    final controller = CodeController();
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
@@ -44,7 +43,11 @@ class ScriptScreen extends StatelessWidget {
                         height: MediaQuery.of(context).size.height -
                             48 -
                             TemplateAppbar.height,
-                        child: CodeEditor(controller: controller),
+                        child: CodeEditor(
+                          controller: cubit.scriptController,
+                          onDownload: cubit.download,
+                          onImport: cubit.importScriptLocal,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 24),

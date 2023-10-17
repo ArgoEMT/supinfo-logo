@@ -11,7 +11,10 @@ class HistoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(border: Border.all(color: appDivider)),
+      decoration: BoxDecoration(
+        border: Border.all(color: appDivider),
+        borderRadius: BorderRadius.circular(8),
+      ),
       height: PainterConstants.painterSize,
       child: SingleChildScrollView(
         child: Padding(

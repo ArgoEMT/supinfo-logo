@@ -38,6 +38,7 @@ class LogoPainter extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
             border: Border.all(color: appPurple),
+            borderRadius: BorderRadius.circular(8),
           ),
           child: CustomPaint(
             size: const Size(
