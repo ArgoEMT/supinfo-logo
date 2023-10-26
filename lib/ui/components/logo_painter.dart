@@ -22,10 +22,12 @@ class LogoPainter extends StatelessWidget {
   String get calculatedPosition {
     final y = model.cursorPosition.dy == PainterConstants.painterSize / 2
         ? 0
-        : -(model.cursorPosition.dy - PainterConstants.painterSize / 2) / 3;
+        : (-(model.cursorPosition.dy - PainterConstants.painterSize / 2) / 3)
+            .round();
     final x = model.cursorPosition.dx == PainterConstants.painterSize / 2
         ? 0
-        : (model.cursorPosition.dx - PainterConstants.painterSize / 2) / 3;
+        : ((model.cursorPosition.dx - PainterConstants.painterSize / 2) / 3)
+            .round();
 
     return 'x: $x, y: $y';
   }

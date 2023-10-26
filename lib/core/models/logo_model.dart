@@ -92,9 +92,23 @@ class LogoModel {
 
   /// Add a new point to the painter
   void addOffset(Offset offset) {
-    painter.addOffset(offset);
-    cursorPosition = offset;
-    //TODO: prevent the cursor from going out of the canvas
+    const offsetMin = Offset(0, 0);
+    const offsetMax =
+        Offset(PainterConstants.painterSize, PainterConstants.painterSize);
+
+    final offsetIsInBounds = offset >= offsetMin && offset <= offsetMax;
+
+    if (!offsetIsInBounds) {
+      final boundedPosition = Offset(
+        offset.dx.clamp(0, PainterConstants.painterSize),
+        offset.dy.clamp(0, PainterConstants.painterSize),
+      );
+      painter.addOffset(boundedPosition);
+      cursorPosition = boundedPosition;
+    } else {
+      painter.addOffset(offset);
+      cursorPosition = offset;
+    }
   }
 
   /// Change the color of the next trails
