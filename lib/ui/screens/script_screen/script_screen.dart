@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:flutter_bloc_template/ui/screens/script_screen/components/download_dialog.dart';
 
 import '../../../config/theme/app_colors.dart';
 import '../../../core/constants/painter_constants.dart';
@@ -45,8 +45,17 @@ class ScriptScreen extends StatelessWidget {
                             TemplateAppbar.height,
                         child: CodeEditor(
                           controller: cubit.scriptController,
-                          onDownload: cubit.download,
+                          onDownload: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => DownloadDialog(
+                                onDownload: cubit.download,
+                                initialName: cubit.scriptName,
+                              ),
+                            );
+                          },
                           onImport: cubit.importScriptLocal,
+                          onRun: cubit.runScript,
                         ),
                       ),
                     ),

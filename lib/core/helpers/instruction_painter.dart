@@ -39,8 +39,12 @@ class InstructionPainter extends CustomPainter {
 
   /// Add a new point to the list
   void addOffset(Offset offset) {
+    final realOffset = Offset(
+      offset.dx.roundToDouble(),
+      offset.dy.roundToDouble(),
+    );
     _points.add(InstructionPainterHistoryItem(
-      offset: offset,
+      offset: realOffset,
       trailColor: _currentColor,
     ));
   }

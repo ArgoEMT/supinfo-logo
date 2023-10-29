@@ -11,11 +11,13 @@ class CodeEditor extends StatelessWidget {
     required this.controller,
     required this.onDownload,
     required this.onImport,
+    required this.onRun,
   });
   final CodeController controller;
 
   final Function() onDownload;
   final Future Function() onImport;
+  final Function() onRun;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +41,10 @@ class CodeEditor extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: AppButton(
-                  isActive: true,
-                  label: 'Lancer le script',
-                  onPressed: () {
-                    //TODO: launch script
-                  }),
+                isActive: true,
+                label: 'Lancer le script',
+                onPressed: onRun,
+              ),
             ),
           ],
         ),
@@ -57,6 +58,13 @@ class CodeEditor extends StatelessWidget {
                 data: CodeThemeData(styles: monokaiSublimeTheme),
                 child: SingleChildScrollView(
                   child: CodeField(
+                    gutterStyle: GutterStyle(
+                        textStyle:
+                            TextStyle(color: Colors.white, fontSize: 16)),
+                    textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
                     focusNode: focusNode,
                     controller: controller,
                   ),

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc_template/core/models/instruction/for_instruction_model.dart';
 
@@ -93,8 +95,10 @@ class LogoModel {
   /// Add a new point to the painter
   void addOffset(Offset offset) {
     const offsetMin = Offset(0, 0);
-    const offsetMax =
-        Offset(PainterConstants.painterSize, PainterConstants.painterSize);
+    const offsetMax = Offset(
+      PainterConstants.painterSize,
+      PainterConstants.painterSize,
+    );
 
     final offsetIsInBounds = offset >= offsetMin && offset <= offsetMax;
 
@@ -147,6 +151,7 @@ class LogoModel {
       PainterConstants.painterSize / 2,
       PainterConstants.painterSize / 2,
     );
+    trailColor = appPurple;
     angle = 0;
     clearPainter();
   }

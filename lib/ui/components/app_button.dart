@@ -9,7 +9,7 @@ class AppButton extends StatelessWidget {
     this.onPressed,
     required this.isActive,
     required this.label,
-    final this.isExpanded = false,
+    this.isExpanded = false,
   });
 
   final Function()? onPressed;

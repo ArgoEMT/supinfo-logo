@@ -29,6 +29,7 @@ class InstructionInterpretor {
       debugPrint('x: $x, y: $y');
 
       model.addOffset(Offset(x, y));
+      // TODO: fix angle isse when out of bounds
     }
   }
 
