@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/ui/screens/login_screen/login_screen.dart';
 
 import '../ui/screens/console_screen/console_screen.dart';
 import '../ui/screens/script_screen/script_screen.dart';
@@ -32,6 +33,12 @@ class AppRouter {
       case RoutePaths.script:
         return routeBuilder(
           target: const ScriptScreen(),
+          settings: settings,
+        );
+
+        case RoutePaths.login:
+        return routeBuilder(
+          target: const LoginScreen(),
           settings: settings,
         );
 
@@ -87,6 +94,7 @@ class CustomPageRoute<T extends Object?> extends MaterialPageRoute<T> {
 class RoutePaths {
   static const console = '/';
   static const script = '/script';
+  static const login = '/login';
 }
 
 extension NavigationExtension on BuildContext {

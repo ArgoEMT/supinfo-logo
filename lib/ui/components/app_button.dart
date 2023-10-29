@@ -10,25 +10,29 @@ class AppButton extends StatelessWidget {
     required this.isActive,
     required this.label,
     this.isExpanded = false,
+    this.isRound = true,
   });
 
   final Function()? onPressed;
   final bool isActive;
   final String label;
   final bool isExpanded;
+  final bool isRound;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(8),
       hoverColor: appPurple.withOpacity(0.2),
       splashColor: appPurple.withOpacity(0.2),
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
+          borderRadius: isRound ? BorderRadius.circular(8): null,
           color: isActive ? appGreen : null,
         ),
         width: isExpanded ? double.infinity : null,
-        padding: const EdgeInsets.all(8),
+        padding:  const EdgeInsets.all(8) ,
         child:
             Text(label, style: isActive ? normal16Background : normal16White),
       ),

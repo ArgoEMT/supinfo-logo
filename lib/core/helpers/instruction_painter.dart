@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/constants/painter_constants.dart';
+import 'package:supinfo_logo/core/constants/painter_constants.dart';
 
 class InstructionPainter extends CustomPainter {
   InstructionPainter({

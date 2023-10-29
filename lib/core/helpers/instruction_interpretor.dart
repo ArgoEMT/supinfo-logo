@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/models/instruction/executable_for_instruction.dart';
+import 'package:supinfo_logo/core/models/instruction/executable_for_instruction.dart';
 
 import '../constants/painter_constants.dart';
 import '../enum/instruction_enum.dart';

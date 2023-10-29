@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_template/ui/screens/script_screen/components/download_dialog.dart';
+import 'package:supinfo_logo/ui/screens/script_screen/components/download_dialog.dart';
 
 import '../../../config/theme/app_colors.dart';
 import '../../../core/constants/painter_constants.dart';

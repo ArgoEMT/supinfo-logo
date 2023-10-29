@@ -6,7 +6,7 @@ import 'dart:html';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_template/core/models/script_model.dart';
+import 'package:supinfo_logo/core/models/script_model.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
 
 import '../../../../core/models/logo_model.dart';
@@ -17,7 +17,7 @@ class ScriptCubit extends Cubit<ScriptState> {
   ScriptCubit() : super(ScriptInitialState());
 
   final scriptController = CodeController();
-  final script = ScriptModel();
+  final script = ScriptModel(userId: '1');
 
   /// The [LogoModel] that interprets the instructions
   final LogoModel logoModel = LogoModel();

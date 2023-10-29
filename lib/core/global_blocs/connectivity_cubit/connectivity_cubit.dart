@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_template/core/models/user_model.dart';
+import 'package:supinfo_logo/core/models/user_model.dart';
+
 
 part 'connectivity_state.dart';
 

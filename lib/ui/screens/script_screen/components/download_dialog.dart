@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/config/app_router.dart';
-import 'package:flutter_bloc_template/ui/components/app_button.dart';
+import 'package:supinfo_logo/config/app_router.dart';
+import 'package:supinfo_logo/ui/components/app_button.dart';
 
 class DownloadDialog extends StatelessWidget {
   const DownloadDialog({

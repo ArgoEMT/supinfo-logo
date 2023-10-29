@@ -1,8 +1,8 @@
-import 'package:flutter_bloc_template/core/enum/instruction_enum.dart';
-import 'package:flutter_bloc_template/core/models/instruction/base_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/for_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/logo_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/repete_instruction_model.dart';
+import 'package:supinfo_logo/core/enum/instruction_enum.dart';
+import 'package:supinfo_logo/core/models/instruction/base_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/for_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/logo_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/repete_instruction_model.dart';
 
 class InstructionTranslator {
   /// Remove the brackets from the instruction string

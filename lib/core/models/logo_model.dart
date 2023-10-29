@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/models/instruction/for_instruction_model.dart';
 
 import '../../config/theme/app_colors.dart';
 import '../constants/painter_constants.dart';
@@ -9,6 +6,7 @@ import '../helpers/instruction_interpretor.dart';
 import '../helpers/instruction_painter.dart';
 import '../helpers/instruction_translator.dart';
 import 'instruction/base_instruction_model.dart';
+import 'instruction/for_instruction_model.dart';
 
 class LogoModel {
   LogoModel({

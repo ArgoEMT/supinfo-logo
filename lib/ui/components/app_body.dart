@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/ui/components/app_drawer/app_drawer.dart';
+import 'package:supinfo_logo/ui/components/app_drawer/app_drawer.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../config/app_router.dart';

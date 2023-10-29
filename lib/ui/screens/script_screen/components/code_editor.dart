@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/ui/components/app_button.dart';
+import 'package:supinfo_logo/ui/components/app_button.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
 import 'package:flutter_highlight/themes/monokai-sublime.dart';
 
@@ -58,13 +58,6 @@ class CodeEditor extends StatelessWidget {
                 data: CodeThemeData(styles: monokaiSublimeTheme),
                 child: SingleChildScrollView(
                   child: CodeField(
-                    gutterStyle: GutterStyle(
-                        textStyle:
-                            TextStyle(color: Colors.white, fontSize: 16)),
-                    textStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
                     focusNode: focusNode,
                     controller: controller,
                   ),
