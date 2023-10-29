@@ -5,7 +5,7 @@ import 'package:supinfo_logo/ui/components/app_button.dart';
 
 import '../../../config/app_router.dart';
 import '../../../config/theme/app_colors.dart';
-import '../../../core/global_blocs/connectivity_cubit/connectivity_cubit.dart';
+import '../../../core/global_blocs/connectivity_cubit/user_cubit.dart';
 import 'drawer_user_header.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -40,7 +40,7 @@ class AppDrawer extends StatelessWidget {
       return ModalRoute.of(context)?.settings.name == route;
     }
 
-    final cubit = context.read<ConnectivityCubit>();
+    final cubit = context.read<UserCubit>();
     return Container(
       decoration: const BoxDecoration(
         border: Border(
@@ -55,9 +55,13 @@ class AppDrawer extends StatelessWidget {
           BlocBuilder(
             bloc: cubit,
             builder: (context, state) {
-              return DrawerUserHeader(
-                user: cubit.connectedUser,
-              );
+              if (state is UserInitializedState) {
+                return DrawerUserHeader(
+                  user: state.user,
+                );
+              }
+              //TODO: create a placeholder state for the drawer header
+              return const Placeholder();
             },
           ),
           _buildItem(

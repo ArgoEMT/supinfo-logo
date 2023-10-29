@@ -1,17 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supinfo_logo/core/models/user_model.dart';
 
+part 'user_state.dart';
 
-part 'connectivity_state.dart';
+class UserCubit extends Cubit<UserState> {
+  UserCubit() : super(UserInitialState());
 
-class ConnectivityCubit extends Cubit<ConnectivityState> {
-  ConnectivityCubit() : super(ConnectivityUnconnectedState());
+  /// Get the current connected user
+  Future fetchUser(User user) async {
+    // Todo: fetch user from firebase
+    await Future.delayed(const Duration(seconds: 1));
+    emit(UserInitializedState(_connectedUser));
+  }
 
-  void setConnected() => emit(ConnectivityConnectedState());
-
-  void setUnconnected() => emit(ConnectivityUnconnectedState());
-
-  var connectedUser = UserModel(
+  final _connectedUser = UserModel(
     username: 'ArgoEMT',
     email: 'agro@providence.fr',
     id: '1',

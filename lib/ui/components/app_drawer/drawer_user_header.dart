@@ -7,7 +7,10 @@ import 'package:supinfo_logo/config/theme/app_text_styles.dart';
 import '../../../core/models/user_model.dart';
 
 class DrawerUserHeader extends StatelessWidget {
-  const DrawerUserHeader({super.key, required this.user});
+  const DrawerUserHeader({
+    super.key,
+    required this.user,
+  });
 
   final UserModel user;
 

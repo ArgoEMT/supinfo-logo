@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final cubit = LoginCubit()..tryAutoLogin();
+    final cubit = LoginCubit(connectivityCubit: context.read())..tryAutoLogin();
     return Scaffold(
       body: Center(
         child: BlocBuilder<LoginCubit, LoginState>(

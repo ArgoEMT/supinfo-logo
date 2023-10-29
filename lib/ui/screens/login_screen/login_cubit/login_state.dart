@@ -10,7 +10,11 @@ final class LoginInitialState extends LoginState {
 
 final class LoginLoadingState extends LoginState {}
 
-final class LoginSuccessState extends LoginState {}
+final class LoginSuccessState extends LoginState {
+  final User user;
+
+  LoginSuccessState(this.user);
+}
 
 final class LoginErrorState extends LoginState {
   final String message;
