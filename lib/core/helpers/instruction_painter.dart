@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/constants/painter_constants.dart';
+import 'package:supinfo_logo/core/constants/painter_constants.dart';
 
 class InstructionPainter extends CustomPainter {
   InstructionPainter({
@@ -8,8 +8,8 @@ class InstructionPainter extends CustomPainter {
     _points.add(
       InstructionPainterHistoryItem(
         offset: const Offset(
-          PainterConstants.painterHeight / 2,
-          PainterConstants.painterWidth / 2,
+          PainterConstants.painterSize / 2,
+          PainterConstants.painterSize / 2,
         ),
         trailColor: trailColor,
       ),
@@ -39,8 +39,12 @@ class InstructionPainter extends CustomPainter {
 
   /// Add a new point to the list
   void addOffset(Offset offset) {
+    final realOffset = Offset(
+      offset.dx.roundToDouble(),
+      offset.dy.roundToDouble(),
+    );
     _points.add(InstructionPainterHistoryItem(
-      offset: offset,
+      offset: realOffset,
       trailColor: _currentColor,
     ));
   }

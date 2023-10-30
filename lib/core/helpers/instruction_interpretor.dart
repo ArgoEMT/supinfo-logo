@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc_template/core/models/instruction/executable_for_instruction.dart';
+import 'package:supinfo_logo/core/models/instruction/executable_for_instruction.dart';
 
 import '../constants/painter_constants.dart';
 import '../enum/instruction_enum.dart';
@@ -12,20 +12,24 @@ import '../models/logo_model.dart';
 
 class InstructionInterpretor {
   /// Add a new point to the painter
-  static void _calculatePosition(
+  static void _moveCursor(
     LogoModel model,
     BaseInstructionModel instructionModel,
+    double multiplier,
   ) {
     if (instructionModel is LogoInstructionModel) {
-      final distance = instructionModel.instruction == InstructionEnum.av
-          ? instructionModel.parametersAsInt.first
-          : -instructionModel.parametersAsInt.first;
+      final distance = (instructionModel.instruction == InstructionEnum.av
+              ? instructionModel.parametersAsInt.first
+              : -instructionModel.parametersAsInt.first) *
+          multiplier;
       final angle = model.angle;
       final position = model.cursorPosition;
       final x = position.dx + distance * sin(angle * pi / 180);
       final y = position.dy - distance * cos(angle * pi / 180);
       debugPrint('x: $x, y: $y');
+
       model.addOffset(Offset(x, y));
+      // TODO: fix angle isse when out of bounds
     }
   }
 
@@ -79,8 +83,8 @@ class InstructionInterpretor {
   static void _invertPosition(LogoModel model) {
     final position = model.cursorPosition;
     debugPrint('current position: $position');
-    final x = PainterConstants.painterHeight - position.dx;
-    final y = PainterConstants.painterWidth - position.dy;
+    final x = PainterConstants.painterSize - position.dx;
+    final y = PainterConstants.painterSize - position.dy;
 
     final newOffset = Offset(x, y);
     debugPrint('new position: $newOffset');
@@ -106,21 +110,22 @@ class InstructionInterpretor {
   static void _setCursorCoordonate(
     LogoModel model,
     BaseInstructionModel instructionModel,
+    double multiplier,
   ) {
     if (instructionModel is LogoInstructionModel) {
       const centerOffset = Offset(
-        PainterConstants.painterHeight / 2,
-        PainterConstants.painterWidth / 2,
+        PainterConstants.painterSize / 2,
+        PainterConstants.painterSize / 2,
       );
-      final x = instructionModel.parameters[0] as double;
-      final y = instructionModel.parameters[1] as double;
+      final x = double.parse(instructionModel.parameters[0]) * multiplier;
+      final y = -double.parse(instructionModel.parameters[1]) * multiplier;
       final position = Offset(x, y) + centerOffset;
       model.jumpTo(position);
     }
   }
 
   /// Run a for instruction.
-  /// 
+  ///
   /// - Get the [ForInstructionModel] from the [LogoModel].
   /// - Extract the values from the instruction string.
   /// - Create a list of [ExecutableForInstruction] with the values.
@@ -159,7 +164,7 @@ class InstructionInterpretor {
       switch (instructionModel.instruction) {
         case InstructionEnum.av:
         case InstructionEnum.re:
-          _calculatePosition(model, instructionModel);
+          _moveCursor(model, instructionModel, PainterConstants.multiplier);
           break;
 
         case InstructionEnum.td:
@@ -205,7 +210,11 @@ class InstructionInterpretor {
           break;
 
         case InstructionEnum.fpos:
-          _setCursorCoordonate(model, instructionModel);
+          _setCursorCoordonate(
+            model,
+            instructionModel,
+            PainterConstants.multiplier,
+          );
           break;
 
         case InstructionEnum.cap:

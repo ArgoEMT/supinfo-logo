@@ -1,6 +1,0 @@
-#include "Flutter/Generated.xcconfig"
-//TODO: Change details here
-BUNDLE_ID_SUFFIX=.qa
-PRODUCT_BUNDLE_IDENTIFIER=com.example.flutter_bloc_template.qa
-FLUTTER_TARGET=lib/main_qa.dart
-APP_NAME=[TEST] Bloc Template

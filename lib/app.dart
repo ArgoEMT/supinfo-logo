@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ import 'config/flavor_config.dart';
 import 'config/services_setup.dart';
 import 'config/theme/app_theme.dart';
 import 'core/services/navigation_service.dart';
+import 'firebase_options.dart';
 
 void run(FlavorConfig flavorConfig) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +45,10 @@ void run(FlavorConfig flavorConfig) async {
     return true;
   };
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const MyApp());
 }
 
@@ -74,7 +80,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     ]);
 
     return MultiBlocProvider(
-      providers: BlocSetup.globalBlocs,
+      providers: BlocSetup.getBlocs(context),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         navigatorKey: GetIt.I<NavigationService>().navigatorKey,
@@ -85,7 +91,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           return [
             AppRouter.generateRoute(
               const RouteSettings(
-                name: RoutePaths.home,
+                name: RoutePaths.login,
               ),
             ),
           ];

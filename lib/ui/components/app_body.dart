@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/ui/components/app_drawer/app_drawer.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../config/app_router.dart';
@@ -51,7 +52,7 @@ class AppBody extends StatelessWidget {
             if (context.canPop) {
               context.pop();
             } else {
-              await context.go(RoutePaths.home);
+              await context.go(RoutePaths.console);
             }
             return Future.value(false);
           },
@@ -61,34 +62,41 @@ class AppBody extends StatelessWidget {
           location: BannerLocation.topEnd,
           color: flavorConfig.color,
           message: flavorConfig.flavor.toString(),
-          child: Scaffold(
-            appBar: appBar ??
-                (showAppBar
-                    ? TemplateAppbar(
-                        backgroundColor:
-                            appBarBackgroundColor ?? appbackgroundColor,
-                        child: Row(
-                          children: [
-                            if (titleIcon != null)
-                              Icon(
-                                titleIcon!,
-                                color: appPurple,
+          child: Row(
+            children: [
+              const Material(child: AppDrawer()),
+              Expanded(
+                child: Scaffold(
+                  appBar: appBar ??
+                      (showAppBar
+                          ? TemplateAppbar(
+                              backgroundColor:
+                                  appBarBackgroundColor ?? appbackgroundColor,
+                              child: Row(
+                                children: [
+                                  if (titleIcon != null)
+                                    Icon(
+                                      titleIcon!,
+                                      color: appPurple,
+                                    ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    title!,
+                                    style: bold20White,
+                                  ),
+                                ],
                               ),
-                            const SizedBox(width: 10),
-                            Text(
-                              title!,
-                              style: bold20White,
-                            ),
-                          ],
-                        ),
-                      )
-                    : null),
-            body: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: contentPadding ? 16 : 0,
+                            )
+                          : null),
+                  body: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: contentPadding ? 16 : 0,
+                    ),
+                    child: body,
+                  ),
+                ),
               ),
-              child: body,
-            ),
+            ],
           ),
         ),
       ),

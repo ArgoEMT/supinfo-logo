@@ -30,32 +30,37 @@ class TemplateAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(100);
 
+  static double get height => 30;
+
   @override
   Widget build(BuildContext context) {
     final color = backgroundColor ?? appWhite;
 
     return SizedBox(
-      height: 100,
-      child: AppBar(
-        backgroundColor: color,
-        elevation: 0,
-        automaticallyImplyLeading: returnType != null,
-        leadingWidth: 48,
-        leading: returnType != null
-            ? InkWell(
-                onTap: () => onPop != null ? onPop!() : context.pop(),
-                child: Icon(
-                  returnType == ReturnType.close
-                      ? Icons.close
-                      : Icons.arrow_back_ios_new,
-                  color: textColor ?? appPurple,
-                  size: 18,
-                ),
-              )
-            : null,
-        title: child,
-        centerTitle: false,
-        actions: actions,
+      height: 30,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: AppBar(
+          backgroundColor: color,
+          elevation: 0,
+          automaticallyImplyLeading: returnType != null,
+          leadingWidth: 48,
+          leading: returnType != null
+              ? InkWell(
+                  onTap: () => onPop != null ? onPop!() : context.pop(),
+                  child: Icon(
+                    returnType == ReturnType.close
+                        ? Icons.close
+                        : Icons.arrow_back_ios_new,
+                    color: textColor ?? appPurple,
+                    size: 18,
+                  ),
+                )
+              : null,
+          title: child,
+          centerTitle: false,
+          actions: actions,
+        ),
       ),
     );
   }

@@ -1,6 +1,6 @@
-import 'package:flutter_bloc_template/core/models/instruction/base_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/logo_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/repete_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/base_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/logo_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/repete_instruction_model.dart';
 
 class ForInstructionModel extends BaseInstructionModel {
   final List<String> parametersName;

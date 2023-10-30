@@ -1,8 +1,8 @@
-import 'package:flutter_bloc_template/core/enum/instruction_enum.dart';
-import 'package:flutter_bloc_template/core/models/instruction/base_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/for_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/logo_instruction_model.dart';
-import 'package:flutter_bloc_template/core/models/instruction/repete_instruction_model.dart';
+import 'package:supinfo_logo/core/enum/instruction_enum.dart';
+import 'package:supinfo_logo/core/models/instruction/base_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/for_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/logo_instruction_model.dart';
+import 'package:supinfo_logo/core/models/instruction/repete_instruction_model.dart';
 
 class InstructionTranslator {
   /// Remove the brackets from the instruction string
@@ -19,8 +19,8 @@ class InstructionTranslator {
   /// Take a string of instructions and return a list of [LogoInstructionModel]
   /// If the parameter is not an int, its value will be -1
   static List<LogoInstructionModel> _createInstructionList(
-      String instructionString,
-      ) {
+    String instructionString,
+  ) {
     final instructionList = instructionString.split(' ');
     if (instructionList.isEmpty) {
       throw Exception('Instruction bloc is empty');
@@ -31,16 +31,19 @@ class InstructionTranslator {
       for (var i = 0; i < cleanedList.length; i++) {
         final instruction = InstructionEnum.fromString(cleanedList[i]);
         final parameterCount = instruction.parameterCount;
-        final parameters = cleanedList
-            .sublist(i + 1, i + 1 + parameterCount)
-            .toList();
-        i = i + parameterCount;
-        returnList.add(
-          LogoInstructionModel(
-            instruction: instruction,
-            parameters: parameters,
-          ),
-        );
+        if (parameterCount < 0) {
+          // todo: repete instruction
+        } else {
+          final parameters =
+              cleanedList.sublist(i + 1, i + 1 + parameterCount).toList();
+          i = i + parameterCount;
+          returnList.add(
+            LogoInstructionModel(
+              instruction: instruction,
+              parameters: parameters,
+            ),
+          );
+        }
       }
       return returnList;
     } catch (e) {
@@ -90,8 +93,7 @@ class InstructionTranslator {
         );
       }
 
-      final parameters =
-          instructionList.sublist(1).toList();
+      final parameters = instructionList.sublist(1).toList();
 
       if (parameters.length < instruction.parameterCount) {
         throw Exception(
