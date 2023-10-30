@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supinfo_logo/core/global_blocs/connectivity_cubit/user_cubit.dart';
+
+import '../../../../core/global_blocs/user_cubit/user_cubit.dart';
 
 part 'login_state.dart';
 
@@ -27,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
       _lastState = state;
     }
     if (newState is LoginSuccessState) {
-      await _connectivityCubit.fetchUser(newState.user);
+      await _connectivityCubit.fetchMe();
     }
     emit(newState);
   }
@@ -64,7 +65,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future createAccount() async {
     _changeState(LoginLoadingState());
     try {
-      final credentials = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credentials =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
@@ -85,7 +87,8 @@ class LoginCubit extends Cubit<LoginState> {
   Future login() async {
     _changeState(LoginLoadingState());
     try {
-      final credentials = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final credentials =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );

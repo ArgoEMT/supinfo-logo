@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supinfo_logo/core/global_blocs/user_cubit/user_cubit.dart';
 import 'package:supinfo_logo/ui/components/app_button.dart';
 
 import '../../../config/app_router.dart';
 import '../../../config/theme/app_colors.dart';
-import '../../../core/global_blocs/connectivity_cubit/user_cubit.dart';
 import 'drawer_user_header.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -56,12 +56,10 @@ class AppDrawer extends StatelessWidget {
             bloc: cubit,
             builder: (context, state) {
               if (state is UserInitializedState) {
-                return DrawerUserHeader(
-                  user: state.user,
-                );
               }
-              //TODO: create a placeholder state for the drawer header
-              return const Placeholder();
+                return DrawerUserHeader(
+                  user: state is UserInitializedState ? state.user : null,
+                );
             },
           ),
           _buildItem(

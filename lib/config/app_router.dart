@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:supinfo_logo/ui/screens/login_screen/login_screen.dart';
+import 'package:supinfo_logo/ui/screens/splash_screen/splash_screen.dart';
 
 import '../ui/screens/console_screen/console_screen.dart';
+import '../ui/screens/init_user_screen/init_user_screen.dart';
+import '../ui/screens/login_screen/login_screen.dart';
 import '../ui/screens/script_screen/script_screen.dart';
 
 class AppRouter {
@@ -22,7 +24,6 @@ class AppRouter {
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var name = settings.name;
-
     switch (name) {
       case RoutePaths.console:
         return routeBuilder(
@@ -36,9 +37,21 @@ class AppRouter {
           settings: settings,
         );
 
-        case RoutePaths.login:
+      case RoutePaths.login:
         return routeBuilder(
           target: const LoginScreen(),
+          settings: settings,
+        );
+
+      case RoutePaths.initUser:
+        return routeBuilder(
+          target: const InitUserScreen(),
+          settings: settings,
+        );
+
+        case RoutePaths.splash:
+        return routeBuilder(
+          target: const SplashScreen(),
           settings: settings,
         );
 
@@ -95,6 +108,8 @@ class RoutePaths {
   static const console = '/';
   static const script = '/script';
   static const login = '/login';
+  static const initUser = '/initUser';
+  static const splash = '/splash';
 }
 
 extension NavigationExtension on BuildContext {

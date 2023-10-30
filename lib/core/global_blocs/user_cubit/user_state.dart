@@ -9,3 +9,5 @@ final class UserInitializedState extends UserState {
 
   UserInitializedState(this.user);
 }
+
+final class UserIsNotInitState extends UserState {}

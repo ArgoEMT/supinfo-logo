@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/ui/components/app_button.dart';
 
 class ConsoleWidget extends StatelessWidget {
   const ConsoleWidget({
@@ -26,12 +27,13 @@ class ConsoleWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        ElevatedButton(
+        AppButton(
+          isActive: true,
           onPressed: () {
             if (controller.text.isEmpty) return;
             onSaved(controller.text.toLowerCase());
           },
-          child: const Text('Envoyer'),
+          label: 'Envoyer',
         ),
       ],
     );

@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
                 cubit.goBackToLastState();
               }
               if (state is LoginSuccessState) {
-                context.go(RoutePaths.console);
+                context.go(RoutePaths.splash);
               }
             });
 
