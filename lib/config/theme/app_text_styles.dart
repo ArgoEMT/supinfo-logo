@@ -116,6 +116,14 @@ const bold16White = TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+/// Color: [appGreen] - FontSize: 16 - FontWeight: 600
+const bold16Green = TextStyle(
+  fontSize: 16,
+  color: appGreen,
+  fontFamily: 'Inter',
+  fontWeight: FontWeight.w600,
+);
+
 /// Color: [appPurple] - FontSize: 16 - FontWeight: 600
 const TextStyle bold16Purple = TextStyle(
   fontSize: 16,

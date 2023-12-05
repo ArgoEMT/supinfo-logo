@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/ui/screens/classes_screen/classes_screen.dart';
 import 'package:supinfo_logo/ui/screens/splash_screen/splash_screen.dart';
 
 import '../ui/screens/console_screen/console_screen.dart';
@@ -26,34 +27,22 @@ class AppRouter {
     var name = settings.name;
     switch (name) {
       case RoutePaths.console:
-        return routeBuilder(
-          target: const ConsoleScreen(),
-          settings: settings,
-        );
+        return routeBuilder(target: const ConsoleScreen(), settings: settings);
 
       case RoutePaths.script:
-        return routeBuilder(
-          target: const ScriptScreen(),
-          settings: settings,
-        );
+        return routeBuilder(target: const ScriptScreen(), settings: settings);
 
       case RoutePaths.login:
-        return routeBuilder(
-          target: const LoginScreen(),
-          settings: settings,
-        );
+        return routeBuilder(target: const LoginScreen(), settings: settings);
 
       case RoutePaths.initUser:
-        return routeBuilder(
-          target: const InitUserScreen(),
-          settings: settings,
-        );
+        return routeBuilder(target: const InitUserScreen(), settings: settings);
 
-        case RoutePaths.splash:
-        return routeBuilder(
-          target: const SplashScreen(),
-          settings: settings,
-        );
+      case RoutePaths.splash:
+        return routeBuilder(target: const SplashScreen(), settings: settings);
+
+      case RoutePaths.myClasses:
+        return routeBuilder(target: const ClassesScreen(), settings: settings);
 
       /// Handeling 404
       default:
@@ -110,6 +99,7 @@ class RoutePaths {
   static const login = '/login';
   static const initUser = '/initUser';
   static const splash = '/splash';
+  static const myClasses = '/me/classes';
 }
 
 extension NavigationExtension on BuildContext {

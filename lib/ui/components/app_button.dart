@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
     required this.label,
     this.isExpanded = false,
     this.isRound = true,
+    this.showBorders = false,
   });
 
   final Function()? onPressed;
@@ -18,6 +19,7 @@ class AppButton extends StatelessWidget {
   final String label;
   final bool isExpanded;
   final bool isRound;
+  final bool showBorders;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +30,14 @@ class AppButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: isRound ? BorderRadius.circular(8): null,
+          borderRadius: isRound ? BorderRadius.circular(8) : null,
           color: isActive ? appGreen : null,
+          border: showBorders
+              ? Border.all(color: appGreen, width: 1)
+              : Border.all(color: Colors.transparent),
         ),
         width: isExpanded ? double.infinity : null,
-        padding:  const EdgeInsets.all(8) ,
+        padding: const EdgeInsets.all(8),
         child:
             Text(label, style: isActive ? normal16Background : normal16White),
       ),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:supinfo_logo/core/models/user_model.dart';
 
 class UserService {
@@ -11,13 +12,33 @@ class UserService {
     return null;
   }
 
-  Future updateUser(UserModel userModel)async {
+  Future updateUser(UserModel userModel) async {
     final userExist = await _db.collection('users').doc(userModel.id).get();
 
     if (!userExist.exists) {
       return _db.collection('users').doc(userModel.id).set(userModel.toMap());
-    }else {
-      return _db.collection('users').doc(userModel.id).update(userModel.toMap());
+    } else {
+      return _db
+          .collection('users')
+          .doc(userModel.id)
+          .update(userModel.toMap());
     }
+  }
+
+  Future<UserModel> getMe() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final me = await getUserById(currentUser!.uid);
+
+    if (me == null) throw Exception('User not found');
+    return me;
+  }
+
+  Future<List<UserModel>> getUsersByIds(List<String> ids) async {
+    final users = await _db
+        .collection('users')
+        .where(FieldPath.documentId, whereIn: ids)
+        .get();
+
+    return users.docs.map((e) => UserModel.fromMap(e.data())).toList();
   }
 }

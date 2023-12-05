@@ -25,7 +25,10 @@ class AppBody extends StatelessWidget {
     this.titleIcon,
     this.scrollPhysics,
     this.hasSingleChildScrollView = true,
-  });
+  }) : assert(
+          title != null || appBar != null,
+          'You have to either provide a title or an appBar',
+        );
 
   final Future<bool> Function()? onWillPop;
   final PreferredSizeWidget? appBar;

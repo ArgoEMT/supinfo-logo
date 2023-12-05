@@ -33,8 +33,8 @@ class InitUserCubit extends Cubit<InitUserState> {
       username: username!,
     );
 
-   await  _userService.updateUser(userModel);
-await _userCubit.fetchMe();
+    await _userService.updateUser(userModel);
+    await _userCubit.fetchMe();
     emit(InitUserSuccessState());
   }
 

@@ -55,11 +55,10 @@ class AppDrawer extends StatelessWidget {
           BlocBuilder(
             bloc: cubit,
             builder: (context, state) {
-              if (state is UserInitializedState) {
-              }
-                return DrawerUserHeader(
-                  user: state is UserInitializedState ? state.user : null,
-                );
+              if (state is UserInitializedState) {}
+              return DrawerUserHeader(
+                user: state is UserInitializedState ? state.user : null,
+              );
             },
           ),
           _buildItem(
@@ -73,7 +72,11 @@ class AppDrawer extends StatelessWidget {
             isActive: checkIfActive(RoutePaths.script),
           ),
           _buildItem(name: 'Recherche de script', isActive: false),
-          _buildItem(name: 'Ma classe', isActive: false),
+          _buildItem(
+            name: 'Ma classe',
+            onTap: () => context.go(RoutePaths.myClasses),
+            isActive: checkIfActive(RoutePaths.myClasses),
+          ),
           const Spacer(),
           const Divider(color: appPurple),
           _buildItem(
