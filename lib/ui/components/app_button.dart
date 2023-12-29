@@ -12,6 +12,7 @@ class AppButton extends StatelessWidget {
     this.isExpanded = false,
     this.isRound = true,
     this.showBorders = false,
+    this.icon,
   });
 
   final Function()? onPressed;
@@ -20,6 +21,7 @@ class AppButton extends StatelessWidget {
   final bool isExpanded;
   final bool isRound;
   final bool showBorders;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +40,22 @@ class AppButton extends StatelessWidget {
         ),
         width: isExpanded ? double.infinity : null,
         padding: const EdgeInsets.all(8),
-        child:
-            Text(label, style: isActive ? normal16Background : normal16White),
+        child: icon == null
+            ? Text(
+                label,
+                style: isActive ? normal16Background : normal16White,
+              )
+            : Row(
+              mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(icon, color: isActive ? Colors.black : Colors.white),
+                  const SizedBox(width: 8),
+                  Text(
+                    label,
+                    style: isActive ? normal16Background : normal16White,
+                  ),
+                ],
+              ),
       ),
     );
   }

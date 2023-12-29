@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supinfo_logo/core/global_blocs/user_cubit/user_cubit.dart';
 import 'package:supinfo_logo/ui/components/app_button.dart';
+import 'package:supinfo_logo/ui/screens/script_screen/script_screen.dart';
 
 import '../../../config/app_router.dart';
 import '../../../config/theme/app_colors.dart';
@@ -68,19 +69,26 @@ class AppDrawer extends StatelessWidget {
           ),
           _buildItem(
             name: 'Editeur de script',
-            onTap: () => context.go(RoutePaths.script),
-            isActive: checkIfActive(RoutePaths.script),
+            onTap: () => context.go(
+              RoutePaths.scriptEditor,
+              arguments: ArgumentsScriptScreen(),
+            ),
+            isActive: checkIfActive(RoutePaths.scriptEditor),
           ),
-          _buildItem(name: 'Recherche de script', isActive: false),
           _buildItem(
-            name: 'Ma classe',
+            name: 'Recherche de script',
+            onTap: () => context.go(RoutePaths.scriptSearch),
+            isActive: checkIfActive(RoutePaths.scriptSearch),
+          ),
+          _buildItem(
+            name: 'Mes classes',
             onTap: () => context.go(RoutePaths.myClasses),
             isActive: checkIfActive(RoutePaths.myClasses),
           ),
           const Spacer(),
           const Divider(color: appPurple),
           _buildItem(
-            name: 'Logout',
+            name: 'Se déconnecter',
             isActive: false,
             onTap: () async {
               await FirebaseAuth.instance.signOut().then(

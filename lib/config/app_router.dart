@@ -1,12 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:supinfo_logo/ui/screens/classes_screen/classes_screen.dart';
-import 'package:supinfo_logo/ui/screens/splash_screen/splash_screen.dart';
 
+import '../ui/screens/classes_screen/classes_screen.dart';
 import '../ui/screens/console_screen/console_screen.dart';
 import '../ui/screens/init_user_screen/init_user_screen.dart';
 import '../ui/screens/login_screen/login_screen.dart';
 import '../ui/screens/script_screen/script_screen.dart';
+import '../ui/screens/search_screen/search_screen.dart';
+import '../ui/screens/splash_screen/splash_screen.dart';
 
 class AppRouter {
   static MaterialPageRoute<T> routeBuilder<T extends Object?>({
@@ -29,8 +30,13 @@ class AppRouter {
       case RoutePaths.console:
         return routeBuilder(target: const ConsoleScreen(), settings: settings);
 
-      case RoutePaths.script:
-        return routeBuilder(target: const ScriptScreen(), settings: settings);
+      case RoutePaths.scriptEditor:
+        assert(settings.arguments is ArgumentsScriptScreen);
+        final arguments = settings.arguments as ArgumentsScriptScreen;
+        return routeBuilder(
+          target: ScriptScreen(arguments: arguments),
+          settings: settings,
+        );
 
       case RoutePaths.login:
         return routeBuilder(target: const LoginScreen(), settings: settings);
@@ -43,6 +49,9 @@ class AppRouter {
 
       case RoutePaths.myClasses:
         return routeBuilder(target: const ClassesScreen(), settings: settings);
+
+        case RoutePaths.scriptSearch:
+        return routeBuilder(target: const SearchScreen(), settings: settings);
 
       /// Handeling 404
       default:
@@ -95,7 +104,8 @@ class CustomPageRoute<T extends Object?> extends MaterialPageRoute<T> {
 
 class RoutePaths {
   static const console = '/';
-  static const script = '/script';
+  static const scriptEditor = '/scripts/editor';
+  static const scriptSearch = '/scripts/search';
   static const login = '/login';
   static const initUser = '/initUser';
   static const splash = '/splash';

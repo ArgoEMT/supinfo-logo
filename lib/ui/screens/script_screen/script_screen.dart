@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supinfo_logo/ui/screens/script_screen/components/download_dialog.dart';
+import 'package:supinfo_logo/ui/screens/script_screen/components/upload_cloud_dialog.dart';
 
 import '../../../config/theme/app_colors.dart';
 import '../../../core/constants/painter_constants.dart';
@@ -10,17 +11,25 @@ import '../../components/template_appbar.dart';
 import 'components/code_editor.dart';
 import 'script_cubit/script_cubit.dart';
 
+class ArgumentsScriptScreen {
+  final String? scriptId;
+
+  ArgumentsScriptScreen({this.scriptId});
+}
+
 class ScriptScreen extends StatelessWidget {
-  const ScriptScreen({super.key});
+  const ScriptScreen({super.key, required this.arguments});
+
+  final ArgumentsScriptScreen arguments;
 
   @override
   Widget build(BuildContext context) {
-    final cubit = ScriptCubit()..init();
+    final cubit = ScriptCubit()..init(arguments.scriptId);
     return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: AppBody(
-        title: 'Interpréteur de script',
+        title: 'Editeur de script',
         body: Padding(
           padding: const EdgeInsets.all(24.0),
           child: BlocBuilder(
@@ -44,6 +53,14 @@ class ScriptScreen extends StatelessWidget {
                             48 -
                             TemplateAppbar.height,
                         child: CodeEditor(
+                          onExportCloud: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => UploadCloudDialog(
+                                onUpload: cubit.exportScriptRemote,
+                              ),
+                            );
+                          },
                           controller: cubit.scriptController,
                           onDownload: () {
                             showDialog(

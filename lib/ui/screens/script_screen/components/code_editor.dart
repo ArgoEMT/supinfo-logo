@@ -12,12 +12,14 @@ class CodeEditor extends StatelessWidget {
     required this.onDownload,
     required this.onImport,
     required this.onRun,
+    required this.onExportCloud,
   });
   final CodeController controller;
 
   final Function() onDownload;
   final Future Function() onImport;
   final Function() onRun;
+  final Function() onExportCloud;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +32,21 @@ class CodeEditor extends StatelessWidget {
               isActive: true,
               label: 'Importer un script',
               onPressed: onImport,
+              icon: Icons.upload_rounded,
             ),
             const SizedBox(width: 16),
             AppButton(
               isActive: true,
               label: 'Télécharger le script',
               onPressed: onDownload,
+              icon: Icons.download_rounded,
+            ),
+            const SizedBox(width: 16),
+            AppButton(
+              isActive: true,
+              label: 'Upload le script',
+              onPressed: onExportCloud,
+              icon: Icons.cloud_upload_rounded,
             ),
             const Spacer(),
             Padding(

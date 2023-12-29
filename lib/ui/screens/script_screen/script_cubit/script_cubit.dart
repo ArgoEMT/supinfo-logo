@@ -6,8 +6,11 @@ import 'dart:html';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supinfo_logo/core/models/script_model.dart';
 import 'package:flutter_code_editor/flutter_code_editor.dart';
+import 'package:supinfo_logo/core/models/script_model.dart';
+import 'package:supinfo_logo/core/services/script_service.dart';
+import 'package:supinfo_logo/core/services/user_service.dart';
+import 'package:supinfo_logo/ui/ui_helpers/ui_snackbar_helper.dart';
 
 import '../../../../core/models/logo_model.dart';
 
@@ -16,8 +19,11 @@ part 'script_state.dart';
 class ScriptCubit extends Cubit<ScriptState> {
   ScriptCubit() : super(ScriptInitialState());
 
+  final _userService = UserService();
+  final _scriptService = ScriptService();
+
   final scriptController = CodeController();
-  final script = ScriptModel(userId: '1');
+  late final ScriptModel script;
 
   /// The [LogoModel] that interprets the instructions
   final LogoModel logoModel = LogoModel();
@@ -52,7 +58,27 @@ class ScriptCubit extends Cubit<ScriptState> {
     }
   }
 
-  Future exportScriptRemote() async {}
+  Future exportScriptRemote(bool isPrivate, String scriptName) async {
+    if (scriptController.text.isEmpty) {
+      showSnackbar(titre: 'Le script ne peut être vide.', isError: true);
+      return;
+    }
+
+    final me = await _userService.getMe();
+
+    script.userId = me.id;
+    script.username = me.username;
+    script.isPublic = !isPrivate;
+    script.name = scriptName;
+    script.scriptTxt = scriptController.text;
+
+    final result = await _scriptService.uploadScript(script);
+    if (result) {
+      showSnackbar(titre: 'Script upload avec succès');
+    } else {
+      showSnackbar(titre: 'Erreur lors de l\'upload du script', isError: true);
+    }
+  }
 
   /// Import a script from a local file
   Future importScriptLocal() async {
@@ -70,10 +96,15 @@ class ScriptCubit extends Cubit<ScriptState> {
     }
   }
 
-  Future importScriptRemote() async {}
-
-  void init() {
-    emit(ScriptLoadingState());
+  Future init(String? scriptId) async {
+    if (scriptId == null) {
+      final me = await _userService.getMe();
+      script = ScriptModel(userId: me.id, username: me.username);
+    } else {
+      script = await _scriptService.getScript(scriptId);
+      final instructionString = script.instructions.join('\n');
+      scriptController.text = instructionString;
+    }
     emit(ScriptDrawState());
   }
 
