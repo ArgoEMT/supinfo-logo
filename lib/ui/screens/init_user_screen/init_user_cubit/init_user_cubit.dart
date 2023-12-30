@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:supinfo_logo/core/global_blocs/user_cubit/user_cubit.dart';
-import 'package:supinfo_logo/ui/ui_helpers/ui_snackbar_helper.dart';
 
+import '../../../../core/global_blocs/user_cubit/user_cubit.dart';
 import '../../../../core/models/user_model.dart';
 import '../../../../core/services/user_service.dart';
 
@@ -33,13 +32,6 @@ class InitUserCubit extends Cubit<InitUserState> {
       image: profilPicture!,
       username: username!,
     );
-
-    final usernameExist = await _userService.checkUsername(username!);
-
-    if (usernameExist) {
-      showSnackbar(titre: 'Ce nom d\'utilisateur existe déjà', isError: true);
-      return;
-    }
 
     await _userService.updateUser(userModel);
     await _userCubit.fetchMe();

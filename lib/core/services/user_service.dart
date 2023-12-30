@@ -12,14 +12,6 @@ class UserService {
     return null;
   }
 
-  Future<bool> checkUsername(String username) async {
-    final users = await _db
-        .collection('users')
-        .where('username', isEqualTo: username)
-        .get();
-
-    return users.docs.isEmpty;
-  }
 
   Future updateUser(UserModel userModel) async {
     final userExist = await _db.collection('users').doc(userModel.id).get();

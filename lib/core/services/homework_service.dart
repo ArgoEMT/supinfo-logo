@@ -45,7 +45,6 @@ class HomeworkService {
   }
 
   Future<bool> updateAnswer(HomeworkAnswerModel answer) async {
-    print('answer.score: ${answer.score}');
     try {
       await _db.collection('answers').doc(answer.id).update(answer.toMap());
       return true;
