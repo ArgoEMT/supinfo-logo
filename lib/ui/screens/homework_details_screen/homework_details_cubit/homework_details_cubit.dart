@@ -82,4 +82,19 @@ class HomeworkDetailsCubit extends Cubit<HomeworkDetailsState> {
       isTeacher: false,
     ));
   }
+
+  Future updateScore({
+    required HomeworkAnswerModel answerModel,
+    required int score,
+    required String classId,
+  }) async {
+    answerModel.score = score;
+
+    await _homeworkService.updateAnswer(answerModel);
+    await init(ArgumentsHomeworkDetailsScreen(
+      homeworkId: answerModel.homeworkId,
+      isTeacher: true,
+      classId: classId,
+    ));
+  }
 }

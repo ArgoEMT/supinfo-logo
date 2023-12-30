@@ -24,6 +24,7 @@ class HomeworkAnswerModel {
       'scriptId': scriptId,
       'homeworkId': homeworkId,
       'scriptName': scriptName,
+      'score': score,
     };
   }
 

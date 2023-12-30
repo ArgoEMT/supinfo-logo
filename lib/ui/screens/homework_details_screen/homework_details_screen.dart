@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supinfo_logo/ui/components/script_search_dialog/script_search_dialog.dart';
 import 'package:supinfo_logo/ui/screens/homework_details_screen/components/homework_student_body.dart';
+import 'package:supinfo_logo/ui/screens/homework_details_screen/components/homework_teacher_body.dart';
 
 import '../../components/app_body.dart';
 import 'homework_details_cubit/homework_details_cubit.dart';
@@ -39,7 +40,17 @@ class HomeworkDetailsScreen extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               } else if (state is HomeworkDetailsLoadedState) {
                 return state.isTeacher
-                    ? Container()
+                    ? HomeworkTeacherBody(
+                        homework: state.homework,
+                        homeworkAnswers: state.homeworkAnswers,
+                        students: state.students,
+                        onScoreChanged: (homeworkAnswer, score) =>
+                            cubit.updateScore(
+                          classId: state.classModel!.id,
+                          answerModel: homeworkAnswer,
+                          score: score,
+                        ),
+                      )
                     : HomeworkStudentBody(
                         createHomeworkAnswer: () {
                           showDialog(

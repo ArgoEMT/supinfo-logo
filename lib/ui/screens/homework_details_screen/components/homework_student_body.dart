@@ -24,6 +24,9 @@ class HomeworkStudentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final canModify = (homework.dueDate.compareTo(DateTime.now()) > 0) &&
+        homeworkAnswer?.score == null;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,17 +45,18 @@ class HomeworkStudentBody extends StatelessWidget {
             else
               const Text('Pas de réponse'),
             const SizedBox(width: 16),
-            AppButton(
-              isActive: true,
-              label: homeworkAnswer != null ? 'Modifier' : 'Ajouter',
-              onPressed: () {
-                if (homeworkAnswer != null) {
-                  updateHomeworkAnswer();
-                } else {
-                  createHomeworkAnswer();
-                }
-              },
-            ),
+            if (canModify)
+              AppButton(
+                isActive: true,
+                label: homeworkAnswer != null ? 'Modifier' : 'Ajouter',
+                onPressed: () {
+                  if (homeworkAnswer != null) {
+                    updateHomeworkAnswer();
+                  } else {
+                    createHomeworkAnswer();
+                  }
+                },
+              ),
             if (homeworkAnswer != null) ...[
               const SizedBox(width: 16),
               AppButton(
