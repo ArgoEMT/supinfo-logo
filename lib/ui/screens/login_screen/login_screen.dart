@@ -35,7 +35,7 @@ class LoginScreen extends StatelessWidget {
             return Container(
               width: 500,
               decoration: BoxDecoration(
-                border: Border.all(color: appPurple),
+                border: Border.all(color: appPurple, width: 2),
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.all(16),

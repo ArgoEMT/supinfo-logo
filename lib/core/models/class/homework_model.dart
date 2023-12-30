@@ -3,32 +3,31 @@ import 'dart:convert';
 import '../user_model.dart';
 
 class HomeworkModel {
-  final String id;
+  final String? id;
   final String title;
   final String description;
-  final DateTime createdAt;
+  DateTime? createdAt;
   final DateTime dueDate;
-  final String classId;
-  final UserModel creator;
+  String? classId;
+  UserModel? creator;
   HomeworkModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.description,
-    required this.createdAt,
+    this.createdAt,
     required this.dueDate,
-    required this.classId,
-    required this.creator,
+    this.classId,
+    this.creator,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
       'title': title,
       'description': description,
-      'createdAt': createdAt.millisecondsSinceEpoch,
+      'createdAt': createdAt!.millisecondsSinceEpoch,
       'dueDate': dueDate.millisecondsSinceEpoch,
       'classId': classId,
-      'creator': creator.toMap(),
+      'creator': creator!.toMap(),
     };
   }
 
@@ -40,11 +39,12 @@ class HomeworkModel {
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
       dueDate: DateTime.fromMillisecondsSinceEpoch(map['dueDate'] as int),
       classId: map['classId'] as String,
-      creator: UserModel.fromMap(map['creator'] as Map<String,dynamic>),
+      creator: UserModel.fromMap(map['creator'] as Map<String, dynamic>),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory HomeworkModel.fromJson(String source) => HomeworkModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory HomeworkModel.fromJson(String source) =>
+      HomeworkModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

@@ -12,7 +12,7 @@ class HistoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: appDivider),
+        border: Border.all(color: appPurple, width: 2),
         borderRadius: BorderRadius.circular(8),
       ),
       height: PainterConstants.painterSize,

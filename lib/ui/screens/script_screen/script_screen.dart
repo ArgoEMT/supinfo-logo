@@ -46,6 +46,7 @@ class ScriptScreen extends StatelessWidget {
                           border: Border(
                             right: BorderSide(
                               color: appPurple,
+                              width: 2,
                             ),
                           ),
                         ),

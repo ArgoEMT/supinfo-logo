@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/ui/screens/class_details_screen/class_details_screen.dart';
 
 import '../ui/screens/classes_screen/classes_screen.dart';
 import '../ui/screens/console_screen/console_screen.dart';
@@ -38,6 +39,14 @@ class AppRouter {
           settings: settings,
         );
 
+      case RoutePaths.classDetails:
+        assert(settings.arguments is ArgumentsClassDetails);
+        final arguments = settings.arguments as ArgumentsClassDetails;
+        return routeBuilder(
+          target: ClassDetailsScreen(arguments: arguments),
+          settings: settings,
+        );
+
       case RoutePaths.login:
         return routeBuilder(target: const LoginScreen(), settings: settings);
 
@@ -50,7 +59,7 @@ class AppRouter {
       case RoutePaths.myClasses:
         return routeBuilder(target: const ClassesScreen(), settings: settings);
 
-        case RoutePaths.scriptSearch:
+      case RoutePaths.scriptSearch:
         return routeBuilder(target: const SearchScreen(), settings: settings);
 
       /// Handeling 404
@@ -110,6 +119,7 @@ class RoutePaths {
   static const initUser = '/initUser';
   static const splash = '/splash';
   static const myClasses = '/me/classes';
+  static const classDetails = '/me/classes/details';
 }
 
 extension NavigationExtension on BuildContext {

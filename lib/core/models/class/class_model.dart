@@ -6,7 +6,7 @@ class ClassModel {
   final String name;
   final List<String> admins;
   final List<String> students;
-  final List<String>? homeworks;
+   List<String>? homeworks;
 
   ClassModel({
     required this.id,

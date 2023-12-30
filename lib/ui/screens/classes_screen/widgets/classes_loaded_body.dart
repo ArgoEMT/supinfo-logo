@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:supinfo_logo/config/app_router.dart';
+import 'package:supinfo_logo/config/theme/app_colors.dart';
 import 'package:supinfo_logo/core/models/class/class_model.dart';
 import 'package:supinfo_logo/ui/components/app_button.dart';
+import 'package:supinfo_logo/ui/screens/class_details_screen/class_details_screen.dart';
 
 class ClassesLoadedBody extends StatelessWidget {
   const ClassesLoadedBody({
@@ -14,7 +17,8 @@ class ClassesLoadedBody extends StatelessWidget {
   final List<ClassModel> classesAsStudent;
   final Function() onCreateClass;
 
-  List<Widget> _buildClassesList(List<ClassModel> classes, bool isAdmin) {
+  List<Widget> _buildClassesList(BuildContext context,
+      {required List<ClassModel> classes, required bool isAdmin}) {
     if (classes.isEmpty && !isAdmin) return [];
     return [
       Text(
@@ -34,9 +38,10 @@ class ClassesLoadedBody extends StatelessWidget {
             isActive: false,
             label: e.name,
             showBorders: true,
-            onPressed: () {
-              //TODO: go to details view
-            },
+            onPressed: () => context.go(
+              RoutePaths.classDetails,
+              arguments: ArgumentsClassDetails(classId: e.id),
+            ),
           ),
         ),
       ),
@@ -55,13 +60,17 @@ class ClassesLoadedBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ..._buildClassesList(classesAsStudent, false),
+        ..._buildClassesList(
+          context,
+          classes: classesAsStudent,
+          isAdmin: false,
+        ),
         if (classesAsStudent.isNotEmpty) ...[
           const SizedBox(height: 48),
-          const Divider(),
+          const Divider(color: appPurple, thickness: 2),
           const SizedBox(height: 48),
         ],
-        ..._buildClassesList(classesAsAdmin, true),
+        ..._buildClassesList(context, classes: classesAsAdmin, isAdmin: true),
       ],
     );
   }

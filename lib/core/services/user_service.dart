@@ -12,6 +12,15 @@ class UserService {
     return null;
   }
 
+  Future<bool> checkUsername(String username) async {
+    final users = await _db
+        .collection('users')
+        .where('username', isEqualTo: username)
+        .get();
+
+    return users.docs.isEmpty;
+  }
+
   Future updateUser(UserModel userModel) async {
     final userExist = await _db.collection('users').doc(userModel.id).get();
 
@@ -25,6 +34,12 @@ class UserService {
     }
   }
 
+  Future updateUsers(List<UserModel> users) async {
+    for (final user in users) {
+      await updateUser(user);
+    }
+  }
+
   Future<UserModel> getMe() async {
     final currentUser = FirebaseAuth.instance.currentUser;
     final me = await getUserById(currentUser!.uid);
@@ -34,11 +49,20 @@ class UserService {
   }
 
   Future<List<UserModel>> getUsersByIds(List<String> ids) async {
-    final users = await _db
-        .collection('users')
-        .where(FieldPath.documentId, whereIn: ids)
-        .get();
+    try {
+      final users = await _db
+          .collection('users')
+          .where(FieldPath.documentId, whereIn: ids)
+          .get();
 
+      return users.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    } catch (_) {
+      return [];
+    }
+  }
+
+  Future<List<UserModel>> getAllUsers() async {
+    final users = await _db.collection('users').get();
     return users.docs.map((e) => UserModel.fromMap(e.data())).toList();
   }
 }

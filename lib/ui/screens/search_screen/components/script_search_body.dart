@@ -53,7 +53,7 @@ class ScriptSearchBody extends StatelessWidget {
         ...scripts.map(
           (script) => Container(
             decoration: const BoxDecoration(
-              border: Border(bottom: BorderSide(color: appPurple)),
+              border: Border(bottom: BorderSide(color: appPurple, width: 2)),
             ),
             child: ListTile(
               trailing: script.isPublic ? null : const Icon(Icons.lock),

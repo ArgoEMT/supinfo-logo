@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supinfo_logo/core/global_blocs/user_cubit/user_cubit.dart';
 import 'package:supinfo_logo/ui/components/app_button.dart';
+import 'package:supinfo_logo/ui/components/app_drawer/app_drawer_item.dart';
 import 'package:supinfo_logo/ui/screens/script_screen/script_screen.dart';
 
 import '../../../config/app_router.dart';
@@ -16,15 +17,14 @@ class AppDrawer extends StatelessWidget {
     required String name,
     Function()? onTap,
     required bool isActive,
+    bool showBorder = true,
   }) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: appPurple,
-          ),
-        ),
-      ),
+      decoration: showBorder
+          ? const BoxDecoration(
+              border: Border(bottom: BorderSide(color: appPurple, width: 2)),
+            )
+          : null,
       child: AppButton(
         isExpanded: true,
         onPressed: isActive ? () {} : onTap,
@@ -44,11 +44,7 @@ class AppDrawer extends StatelessWidget {
     final cubit = context.read<UserCubit>();
     return Container(
       decoration: const BoxDecoration(
-        border: Border(
-          right: BorderSide(
-            color: appPurple,
-          ),
-        ),
+        border: Border(right: BorderSide(color: appPurple, width: 2)),
       ),
       width: 200,
       child: Column(
@@ -67,18 +63,26 @@ class AppDrawer extends StatelessWidget {
             onTap: () => context.go(RoutePaths.console),
             isActive: checkIfActive(RoutePaths.console),
           ),
-          _buildItem(
-            name: 'Editeur de script',
-            onTap: () => context.go(
-              RoutePaths.scriptEditor,
-              arguments: ArgumentsScriptScreen(),
-            ),
-            isActive: checkIfActive(RoutePaths.scriptEditor),
-          ),
-          _buildItem(
-            name: 'Recherche de script',
-            onTap: () => context.go(RoutePaths.scriptSearch),
-            isActive: checkIfActive(RoutePaths.scriptSearch),
+          AppDrawerItem(
+            name: 'Script',
+            isExpanded: checkIfActive(RoutePaths.scriptEditor) ||
+                checkIfActive(RoutePaths.scriptSearch),
+            children: [
+              _buildItem(
+                name: 'Editeur de script',
+                onTap: () => context.go(
+                  RoutePaths.scriptEditor,
+                  arguments: ArgumentsScriptScreen(),
+                ),
+                isActive: checkIfActive(RoutePaths.scriptEditor),
+              ),
+              _buildItem(
+                name: 'Recherche de script',
+                onTap: () => context.go(RoutePaths.scriptSearch),
+                isActive: checkIfActive(RoutePaths.scriptSearch),
+                showBorder: false,
+              ),
+            ],
           ),
           _buildItem(
             name: 'Mes classes',
@@ -86,16 +90,17 @@ class AppDrawer extends StatelessWidget {
             isActive: checkIfActive(RoutePaths.myClasses),
           ),
           const Spacer(),
-          const Divider(color: appPurple),
+          const Divider(color: appPurple, thickness: 2),
+          const SizedBox(height: 12),
           _buildItem(
             name: 'Se déconnecter',
             isActive: false,
-            onTap: () async {
-              await FirebaseAuth.instance.signOut().then(
-                    (value) => context.go(RoutePaths.login),
-                  );
-            },
+            onTap: () => FirebaseAuth.instance.signOut().then(
+                  (value) => context.go(RoutePaths.login),
+                ),
+            showBorder: false,
           ),
+          const SizedBox(height: 12),
         ],
       ),
     );
