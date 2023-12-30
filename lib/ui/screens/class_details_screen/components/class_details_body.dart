@@ -35,6 +35,7 @@ class ClassDetailsBody extends StatelessWidget {
           homeworks: homeworks,
           isTeacher: isTeacher,
           onCreateHomework: onCreateHomework,
+          classId: classModel.id,
         ),
         const SizedBox(height: 24),
         Row(

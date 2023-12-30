@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supinfo_logo/config/theme/app_text_styles.dart';
 import 'package:supinfo_logo/core/global_blocs/user_cubit/user_cubit.dart';
 import 'package:supinfo_logo/ui/components/app_button.dart';
 import 'package:supinfo_logo/ui/components/app_drawer/app_drawer_item.dart';
@@ -90,6 +91,10 @@ class AppDrawer extends StatelessWidget {
             isActive: checkIfActive(RoutePaths.myClasses),
           ),
           const Spacer(),
+          const Text(
+            'Version 1.0.0 | Build 5',
+            style: normal12White,
+          ), //TODO: increment build version
           const Divider(color: appPurple, thickness: 2),
           const SizedBox(height: 12),
           _buildItem(
